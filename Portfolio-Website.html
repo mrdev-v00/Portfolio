@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#6366f1',secondary:'#4f46e5'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color:rgb(15, 23, 42) ;
+            color: #e2e8f0;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #6366f1;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3);
+        }
+        .skill-bar {
+            height: 8px;
+            background-color: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background-color: #6366f1;
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            background-color: #1e293b;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+        }
+        input[type="checkbox"]:after {
+            font-family: "remixicon";
+            content: "\ea5b";
+            font-size: 12px;
+            color: #0f172a;
+            display: none;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #6366f1;
+        }
+        input[type="checkbox"]:checked:after {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="fixed top-0 left-0 w-full bg-[#0f172a] shadow-lg z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-white flex items-center">
+                    <span class="text-primary font-['Pacifico']">BOSS</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-primary transition-colors">Home</a>
+                    <a href="#projects" class="nav-link text-white hover:text-primary transition-colors">Projects</a>
+                    <a href="#about" class="nav-link text-white hover:text-primary transition-colors">About</a>
+                    <a href="#contact" class="nav-link text-white hover:text-primary transition-colors">Contact</a>
+                </nav>
+                <div class="md:hidden flex items-center">
+                    <button class="text-white focus:outline-none w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-28 pb-20 bg-[#0f172a]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center w-full">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        Professional Web Designer <span class="text-primary">Projects in Hours.</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        HTML/CSS enthusiast crafting clean, responsive layouts. Focused on creating intuitive user experiences through thoughtful design and efficient code. Also having knowlege of graphic design and security bot setup.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">
+                            View My Work
+                        </a>
+                        <a href="#contact" class="bg-transparent border-2 border-gray-600 text-white px-6 py-3 !rounded-button font-medium hover:border-primary hover:text-primary transition-all whitespace-nowrap">
+                            Get in Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+                        <div class="relative bg-[#1e293b] rounded-lg p-8 shadow-xl">
+                            <div class="flex items-center mb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="text-purple-400 mr-4">&lt;div&gt;</div>
+                                    <div class="text-gray-400">// Main container</div>
+                                </div>
+                                <div class="flex items-center pl-6">
+                                    <div class="text-blue-400 mr-4">&lt;header&gt;</div>
+                                </div>
+                                <div class="flex items-center pl-12">
+                                    <div class="text-green-400 mr-4">&lt;nav&gt;</div>
+                                    <div class="text-gray-300">Navigation</div>
+                                    <div class="text-green-400 ml-4">&lt;/nav&gt;</div>
+                                </div>
+                                <div class="flex items-center pl-6">
+                                    <div class="text-blue-400 mr-4">&lt;/header&gt;</div>
+                                </div>
+                                <div class="flex items-center pl-6">
+                                    <div class="text-yellow-400 mr-4">&lt;main&gt;</div>
+                                </div>
+                                <div class="flex items-center pl-12">
+                                    <div class="text-primary mr-4">&lt;section&gt;</div>
+                                    <div class="text-gray-300">Hero</div>
+                                    <div class="text-primary ml-4">&lt;/section&gt;</div>
+                                </div>
+                                <div class="flex items-center pl-6">
+                                    <div class="text-yellow-400 mr-4">&lt;/main&gt;</div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="text-purple-400 mr-4">&lt;/div&gt;</div>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-3 right-10 text-primary text-4xl animate-bounce">
+                                <i class="ri-code-s-slash-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-[#111827]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-primary">Projects</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    A showcase of my recent work, focusing on clean design and responsive layouts.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-[#1e293b] rounded-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center">
+                        <div class="text-4xl text-white">
+                            <i class="ri-layout-4-line"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Responsive Portfolio</h3>
+                        <p class="text-gray-400 mb-4">A clean, modern portfolio website with responsive design principles.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">HTML</span>
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-[#1e293b] rounded-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                        <div class="text-4xl text-white">
+                            <i class="ri-store-2-line"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Responsive Book review Page</h3>
+                        <p class="text-gray-400 mb-4">A book review page. with rating, pro/cons section and much more</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">HTML</span>
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-[#0f172a] text-primary text-xs rounded-full">Flexbox</span>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://github.com/mrdev-v00" class="inline-flex items-center text-primary border border-primary px-6 py-3 !rounded-button hover:bg-primary hover:bg-opacity-10 transition-all whitespace-nowrap">
+                    <span>View All Projects</span>
+                    <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-[#0f172a]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="text-primary">Me</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Just starting, but passionate about creating beautiful web experiences.
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">My Journey</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm a self-taught front-end developer with a passion for creating clean, accessible, and user-friendly websites. My journey began with HTML and CSS, and I've been expanding my skills ever since.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        I believe in writing semantic HTML that's accessible to everyone, and CSS that's maintainable and scalable. I'm constantly learning and improving my skills to stay up-to-date with the latest web technologies and best practices.
+                    </p>
+                    <p class="text-gray-300">
+                        When I'm not coding, you can find me exploring design trends, reading tech blogs, or experimenting with new CSS techniques. I'm always open to collaboration and new opportunities to grow as a developer.
+                    </p>
+                    
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" checked class="mr-3">
+                            <span>Responsive Design</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" checked class="mr-3">
+                            <span>Semantic HTML</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" checked class="mr-3">
+                            <span>CSS Flexbox/Grid</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" checked class="mr-3">
+                            <span>Accessibility</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">My Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>HTML</span>
+                                <span>93%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>CSS</span>
+                                <span>72%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>JavaScript</span>
+                                <span>12%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Responsive Design</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Web Accessibility</span>
+                                <span>97%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h4 class="text-xl font-semibold mb-4">Tools I Use</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="bg-[#1e293b] p-4 rounded-lg flex items-center">
+                                <div class="w-10 h-10 flex items-center justify-center text-primary mr-3">
+                                    <i class="ri-code-s-slash-line ri-lg"></i>
+                                </div>
+                                <span>VS Code</span>
+                            </div>
+                            <div class="bg-[#1e293b] p-4 rounded-lg flex items-center">
+                                <div class="w-10 h-10 flex items-center justify-center text-primary mr-3">
+                                    <i class="ri-github-fill ri-lg"></i>
+                                </div>
+                                <span>GitHub</span>
+                            </div>
+                            <div class="bg-[#1e293b] p-4 rounded-lg flex items-center">
+                                <div class="w-10 h-10 flex items-center justify-center text-primary mr-3">
+                                    <i class="ri-terminal-box-line ri-lg"></i>
+                                </div>
+                                <span>Terminal</span>
+                            </div>
+                            <div class="bg-[#1e293b] p-4 rounded-lg flex items-center">
+                                <div class="w-10 h-10 flex items-center justify-center text-primary mr-3">
+                                    <i class="ri-figma-line ri-lg"></i>
+                                </div>
+                                <span>Figma</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-[#111827]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="text-primary">Touch</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Have a project in mind or just want to say hello? I'd love to hear from you!
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="md:w-1/3">
+                        <div class="space-y-8">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-primary mr-4">
+                                    <i class="ri-mail-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">Email</h4>
+                                    <a href="mailto:muhammedyassa2@gmail.com" class="text-gray-400 hover:text-primary transition-colors">muhammedyassa2@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-primary mr-4">
+                                    <i class="ri-map-pin-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">Location</h4>
+                                    <p class="text-gray-400">Karachi, Pakistan</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center text-primary mr-4">
+                                    <i class="ri-github-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">GitHub</h4>
+                                    <a href="https://github.com/mrdev-v00" class="text-gray-400 hover:text-primary transition-colors">github.com/mrdev-v00</a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f172a] border-t border-gray-800">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-white flex items-center">
+                        <span class="text-primary font-['Pacifico']">&lt;/&gt;</span>
+                    </a>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="https://github.com/mrdev-v00" class="w-10 h-10 flex items-center justify-center bg-[#1e293b] rounded-full text-white hover:bg-primary transition-colors">
+                        <i class="ri-github-line"></i>
+                    </a>
+                    <a href="https://instagram.com/dpb_boss" class="w-10 h-10 flex items-center justify-center bg-[#1e293b] rounded-full text-white hover:bg-primary transition-colors">
+                        <i class="ri-instagram-line"></i>
+                    </a>
+                <div class="text-gray-500 text-sm">
+                    Built from scratch with HTML & CSS © 2025
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script id="navigation-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script id="skills-animation">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate skill bars when they come into view
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.parentElement.previousElementSibling.lastElementChild.textContent;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                bar.style.width = '0%';
+                observer.observe(bar);
+            });
+        });
+    </script>
+
+    <script id="mobile-menu">
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.md\\:hidden button');
+            
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    const mobileMenu = document.createElement('div');
+                    mobileMenu.className = 'fixed inset-0 bg-[#0f172a] z-50 flex flex-col items-center justify-center';
+                    mobileMenu.innerHTML = `
+                        <button class="absolute top-6 right-6 text-white focus:outline-none w-10 h-10 flex items-center justify-center">
+                            <i class="ri-close-line ri-lg"></i>
+                        </button>
+                        <nav class="flex flex-col space-y-6 text-center">
+                            <a href="#home" class="text-white text-xl hover:text-primary transition-colors">Home</a>
+                            <a href="#projects" class="text-white text-xl hover:text-primary transition-colors">Projects</a>
+                            <a href="#about" class="text-white text-xl hover:text-primary transition-colors">About</a>
+                            <a href="#contact" class="text-white text-xl hover:text-primary transition-colors">Contact</a>
+                        </nav>
+                    `;
+                    
+                    document.body.appendChild(mobileMenu);
+                    document.body.style.overflow = 'hidden';
+                    
+                    const closeButton = mobileMenu.querySelector('button');
+                    closeButton.addEventListener('click', function() {
+                        document.body.removeChild(mobileMenu);
+                        document.body.style.overflow = '';
+                    });
+                    
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', function() {
+                            document.body.removeChild(mobileMenu);
+                            document.body.style.overflow = '';
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

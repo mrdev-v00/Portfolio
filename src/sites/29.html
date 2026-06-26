@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPulse | Modern Tech Blog</title>
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Light Theme */
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #4361ee;
+            --secondary-color: #e9ecef;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --secondary-color: #1e1e1e;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* === Header === */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* === Category Filters === */
+        .category-filters {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* === Blog Grid === */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* === Footer === */
+        footer {
+            background: var(--secondary-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .copyright {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .category-filters {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <a href="#" class="logo">TechPulse</a>
+                <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
+            </div>
+        </header>
+
+        <!-- Category Filters -->
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="ai">AI</button>
+            <button class="filter-btn" data-category="webdev">Web Dev</button>
+            <button class="filter-btn" data-category="mobile">Mobile</button>
+            <button class="filter-btn" data-category="cloud">Cloud</button>
+            <button class="filter-btn" data-category="security">Security</button>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blog Card 1 -->
+            <article class="blog-card" data-category="ai">
+                <img src="https://images.unsplash.com/photo-1677442135136-760c813cd9d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="AI" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">AI</span>
+                    <h3 class="card-title">The Future of Generative AI in 2024</h3>
+                    <p class="card-excerpt">Exploring how new AI models are transforming creative industries and what to expect in the coming year.</p>
+                    <div class="card-meta">
+                        <span>June 15, 2023</span>
+                        <span>8 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 2 -->
+            <article class="blog-card" data-category="webdev">
+                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Web Development" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">Web Dev</span>
+                    <h3 class="card-title">React 19: What's Coming Next?</h3>
+                    <p class="card-excerpt">A deep dive into the upcoming features of React 19 and how they'll change frontend development.</p>
+                    <div class="card-meta">
+                        <span>June 10, 2023</span>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 3 -->
+            <article class="blog-card" data-category="mobile">
+                <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Mobile" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">Mobile</span>
+                    <h3 class="card-title">Flutter vs. Native: Performance Benchmarks</h3>
+                    <p class="card-excerpt">Comparing the real-world performance of Flutter apps against native iOS and Android implementations.</p>
+                    <div class="card-meta">
+                        <span>June 5, 2023</span>
+                        <span>10 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 4 -->
+            <article class="blog-card" data-category="cloud">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cloud" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">Cloud</span>
+                    <h3 class="card-title">Serverless Architectures at Scale</h3>
+                    <p class="card-excerpt">How major companies are using serverless to handle millions of requests with minimal infrastructure.</p>
+                    <div class="card-meta">
+                        <span>May 28, 2023</span>
+                        <span>12 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 5 -->
+            <article class="blog-card" data-category="security">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Security" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">Security</span>
+                    <h3 class="card-title">Zero Trust Security for Modern Apps</h3>
+                    <p class="card-excerpt">Implementing zero trust principles in your application architecture to prevent data breaches.</p>
+                    <div class="card-meta">
+                        <span>May 20, 2023</span>
+                        <span>9 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 6 -->
+            <article class="blog-card" data-category="ai">
+                <img src="https://images.unsplash.com/photo-1677442135136-760c813cd9d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="AI" class="card-image">
+                <div class="card-content">
+                    <span class="card-category">AI</span>
+                    <h3 class="card-title">Ethical Considerations in AI Development</h3>
+                    <p class="card-excerpt">The moral responsibilities of AI engineers and how to build more ethical machine learning models.</p>
+                    <div class="card-meta">
+                        <span>May 15, 2023</span>
+                        <span>7 min read</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">Careers</a>
+            </div>
+            <p class="copyright">© 2023 TechPulse. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+            
+            // Theme Toggle
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌓';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '🌞';
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '🌞';
+            }
+            
+            // Category Filtering
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    // Filter cards
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

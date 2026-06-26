@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Type Journal | Editorial Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Colors */
+            --text-primary: #222;
+            --text-secondary: #555;
+            --accent-color: #8b5a2b;
+            --bg-color: #fff;
+            --border-color: #e0e0e0;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Source Serif Pro', serif;
+            --font-ui: 'Roboto', sans-serif;
+            
+            /* Spacing */
+            --space-unit: 1rem;
+            --space-xs: calc(0.5 * var(--space-unit));
+            --space-sm: calc(0.75 * var(--space-unit));
+            --space-md: calc(1.25 * var(--space-unit));
+            --space-lg: calc(2 * var(--space-unit));
+            --space-xl: calc(3 * var(--space-unit));
+            
+            /* Measures */
+            --measure: 65ch;
+            --measure-wide: 80ch;
+            --line-height: 1.6;
+            --line-height-tight: 1.3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+            line-height: var(--line-height);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === Typography Scale === */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--space-sm);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.052rem; }
+        h2 { font-size: 2.441rem; }
+        h3 { font-size: 1.953rem; }
+        h4 { font-size: 1.563rem; }
+        h5 { font-size: 1.25rem; }
+        p { margin-bottom: var(--space-md); }
+
+        .text-lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .text-small {
+            font-size: 0.875rem;
+        }
+
+        /* === Layout === */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* === Header === */
+        header {
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--space-xl);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .site-title span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .nav-links a {
+            font-family: var(--font-ui);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.875rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* === Hero Article === */
+        .hero-article {
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            font-family: var(--font-ui);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-content {
+            max-width: var(--measure-wide);
+            margin: 0 auto;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+        }
+
+        /* === Article Grid === */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: var(--space-md);
+        }
+
+        .article-card-meta {
+            font-family: var(--font-ui);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .article-card-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .read-more {
+            font-family: var(--font-ui);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+
+        /* === Pullquote === */
+        .pullquote {
+            max-width: var(--measure-wide);
+            margin: var(--space-xl) auto;
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pullquote-text {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pullquote-cite {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* === Newsletter === */
+        .newsletter {
+            background-color: #f9f9f9;
+            padding: var(--space-xl) 0;
+            margin-bottom: var(--space-xl);
+        }
+
+        .newsletter-content {
+            max-width: var(--measure);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 400px;
+            margin: var(--space-md) auto 0;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-sm);
+            border: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            background-color: var(--text-primary);
+            color: white;
+            border: none;
+            padding: 0 var(--space-md);
+            font-family: var(--font-ui);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        /* === Footer === */
+        footer {
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .footer-links a {
+            font-family: var(--font-ui);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .copyright {
+            font-family: var(--font-ui);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            :root {
+                --space-unit: 0.8rem;
+            }
+            
+            h1 { font-size: 2.441rem; }
+            h2 { font-size: 1.953rem; }
+            h3 { font-size: 1.563rem; }
+            
+            .header-content {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .hero-image {
+                height: 300px;
+            }
+            
+            .pullquote-text {
+                font-size: 1.563rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">The <span>Type</span> Journal</h1>
+                <nav class="nav-links">
+                    <a href="#">Culture</a>
+                    <a href="#">Design</a>
+                    <a href="#">Typography</a>
+                    <a href="#">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Article -->
+        <div class="container">
+            <article class="hero-article">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Typography in the wild" class="hero-image">
+                <div class="hero-meta">
+                    <span>Design</span>
+                    <span>June 15, 2023</span>
+                    <span>8 min read</span>
+                </div>
+                <div class="hero-content">
+                    <h2>The Enduring Power of Print Typography in a Digital Age</h2>
+                    <p class="text-lead">While digital media dominates our reading experiences, traditional print typography continues to influence designers and readers alike. This exploration examines why printed matter still matters.</p>
+                    <p>In an era where screens have become our primary windows to information, one might assume that the art of print typography would fade into obscurity. Yet, as any book lover or magazine collector can attest, there remains an ineffable quality to well-set type on physical pages that digital displays struggle to replicate.</p>
+                    <p>The tactile experience of reading—the weight of paper, the smell of ink, the subtle texture of letterforms pressed into a page—creates a cognitive and emotional connection that transcends mere information transfer. Studies in neuroscience suggest that physical reading engages different parts of the brain than screen reading, potentially leading to better comprehension and retention.</p>
+                </div>
+            </article>
+
+            <!-- Pullquote -->
+            <div class="pullquote">
+                <blockquote>
+                    <p class="pullquote-text">"Typography is the craft of endowing human language with a durable visual form."</p>
+                    <cite class="pullquote-cite">— Robert Bringhurst</cite>
+                </blockquote>
+            </div>
+
+            <!-- Article Grid -->
+            <div class="article-grid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Book typography" class="article-card-image">
+                    <span class="article-card-meta">Typography • May 28, 2023</span>
+                    <h3 class="article-card-title">The Anatomy of a Perfect Book Spread</h3>
+                    <p class="article-card-excerpt">Examining the delicate balance between margins, gutters, and type that creates harmonious book interiors.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Street typography" class="article-card-image">
+                    <span class="article-card-meta">Culture • May 15, 2023</span>
+                    <h3 class="article-card-title">Urban Letterforms: Typography of the City</h3>
+                    <p class="article-card-excerpt">How street signs, graffiti, and architectural lettering shape our visual understanding of urban spaces.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Type specimen" class="article-card-image">
+                    <span class="article-card-meta">Design • April 30, 2023</span>
+                    <h3 class="article-card-title">Reviving Classical Typefaces for Modern Use</h3>
+                    <p class="article-card-excerpt">Contemporary designers are breathing new life into historical type designs with surprising results.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h3>Type Matters</h3>
+                    <p>Subscribe to our newsletter for weekly essays on typography, design, and visual culture.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" class="newsletter-input">
+                        <button type="submit" class="newsletter-button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Archive</a>
+                </div>
+                <p class="copyright">© 2023 The Type Journal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

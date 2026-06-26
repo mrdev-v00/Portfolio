@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Stays | Book Your Perfect Hotel</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #2a7fba;
+            --primary-dark: #1a5f8b;
+            --primary-light: #e1f0fa;
+            --secondary: #f9a825;
+            --light: #f8f9fa;
+            --dark: #212121;
+            --gray: #757575;
+            --light-gray: #e0e0e0;
+            --white: #ffffff;
+            --error: #e74c3c;
+            --success: #2ecc71;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .search-box {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 800px;
+        }
+
+        .search-box h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .search-box p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .search-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .search-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .search-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 127, 186, 0.2);
+        }
+
+        .search-btn {
+            grid-column: 1 / -1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Hotel Cards */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hotel-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hotel-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.05);
+        }
+
+        .hotel-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .hotel-info {
+            padding: 1.5rem;
+        }
+
+        .hotel-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .hotel-location {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .hotel-location i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hotel-rating-stars {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        .hotel-rating-count {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .hotel-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .book-now {
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-group:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .filter-group.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .filter-group.active .filter-count {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        .filter-count {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #bdbdbd;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--white);
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            color: #bdbdbd;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-form .btn {
+            padding: 0.8rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                height: auto;
+                padding: 6rem 5%;
+            }
+
+            .search-box h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 0.5rem;
+            }
+
+            .search-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-title {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 1rem auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="logo-icon fas fa-hotel"></i>
+                <span class="logo-text">Luxury<span>Stays</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Search -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="search-box">
+                <h1>Find Your Perfect Stay</h1>
+                <p>Discover and book luxury hotels, resorts, and apartments worldwide</p>
+                
+                <div class="search-tabs">
+                    <div class="search-tab active">Hotels</div>
+                    <div class="search-tab">Resorts</div>
+                    <div class="search-tab">Apartments</div>
+                    <div class="search-tab">Villas</div>
+                </div>
+                
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" class="form-control" placeholder="City, region, or hotel">
+                    </div>
+                    <div class="form-group">
+                        <label for="check-in">Check-in</label>
+                        <input type="date" id="check-in" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out">Check-out</label>
+                        <input type="date" id="check-out" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Guests</label>
+                        <select id="guests" class="form-control">
+                            <option value="1">1 Adult</option>
+                            <option value="2" selected>2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                            <option value="family">Family</option>
+                        </select>
+                    </div>
+                    <div class="search-btn">
+                        <button type="submit" class="btn">Search Hotels</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Popular Destinations -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Popular Destinations</h2>
+                <a href="#" class="view-all">View all destinations</a>
+            </div>
+            
+            <div class="filters">
+                <span class="filter-label">Filter by:</span>
+                <div class="filter-group active">
+                    <span>All</span>
+                    <span class="filter-count">24</span>
+                </div>
+                <div class="filter-group">
+                    <span>Beach</span>
+                    <span class="filter-count">8</span>
+                </div>
+                <div class="filter-group">
+                    <span>Mountain</span>
+                    <span class="filter-count">5</span>
+                </div>
+                <div class="filter-group">
+                    <span>City</span>
+                    <span class="filter-count">7</span>
+                </div>
+                <div class="filter-group">
+                    <span>Luxury</span>
+                    <span class="filter-count">4</span>
+                </div>
+            </div>
+            
+            <div class="hotels-grid">
+                <!-- Hotel 1 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Oceanview Resort">
+                        <div class="hotel-badge">Best Seller</div>
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Oceanview Resort & Spa</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Bali, Indonesia
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="hotel-rating-count">(428 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$249</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 2 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Grand Mountain Hotel">
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Grand Mountain Hotel</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Aspen, USA
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="hotel-rating-count">(312 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$189</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 3 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Urban Luxury Suites">
+                        <div class="hotel-badge">Limited Deal</div>
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Urban Luxury Suites</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> New York, USA
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="hotel-rating-count">(527 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$320</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 4 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Paradise Beach Resort">
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Paradise Beach Resort</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Maldives
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="hotel-rating-count">(891 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$410</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Luxury Collection -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Luxury Collection</h2>
+                <a href="#" class="view-all">View all luxury hotels</a>
+            </div>
+            
+            <div class="hotels-grid">
+                <!-- Hotel 5 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Royal Palace Hotel">
+                        <div class="hotel-badge">5 Star</div>
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Royal Palace Hotel</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Dubai, UAE
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="hotel-rating-count">(1,024 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$680</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 6 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chateau Montclair">
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Chateau Montclair</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Paris, France
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="hotel-rating-count">(742 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$550</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 7 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Emerald Bay Villas">
+                        <div class="hotel-badge">Exclusive</div>
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">Emerald Bay Villas</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Santorini, Greece
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="hotel-rating-count">(386 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$720</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 8 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="https://images.unsplash.com/photo-1535827841776-24afc1e255ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="The Venetian Towers">
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">The Venetian Towers</h3>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i> Venice, Italy
+                        </div>
+                        <div class="hotel-rating">
+                            <div class="hotel-rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="hotel-rating-count">(612 reviews)</div>
+                        </div>
+                        <div class="hotel-price">
+                            <div>
+                                <div class="price-amount">$490</div>
+                                <div class="price-period">per night</div>
+                            </div>
+                            <button class="btn book-now">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Luxury Stays</h3>
+                <p>Discover and book the finest hotels and resorts around the world for an unforgettable travel experience.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for exclusive deals and travel inspiration.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Luxury Stays. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Initialize date inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum dates for check-in/check-out
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            // Format dates as YYYY-MM-DD
+            const formatDate = (date) => {
+                const dd = String(date.getDate()).padStart(2, '0');
+                const mm = String(date.getMonth() + 1).padStart(2, '0');
+                const yyyy = date.getFullYear();
+                return `${yyyy}-${mm}-${dd}`;
+            };
+            
+            // Set min dates
+            document.getElementById('check-in').min = formatDate(today);
+            document.getElementById('check-out').min = formatDate(tomorrow);
+            
+            // Set default check-in to today and check-out to tomorrow
+            document.getElementById('check-in').value = formatDate(today);
+            document.getElementById('check-out').value = formatDate(tomorrow);
+            
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.search-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Filter functionality
+            const filters = document.querySelectorAll('.filter-group');
+            filters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    
+                    filters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // In a real app, you would filter the hotels here
+                });
+            });
+            
+            // Book Now button functionality
+            const bookButtons = document.querySelectorAll('.book-now');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const hotelCard = this.closest('.hotel-card');
+                    const hotelName = hotelCard.querySelector('.hotel-name').textContent;
+                    alert(`Booking initiated for ${hotelName}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

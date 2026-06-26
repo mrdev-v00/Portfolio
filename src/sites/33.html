@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masonry Grid Blog</title>
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Light Theme */
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #4361ee;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e9ecef;
+            --accent-color: #5a72e6;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* === Header === */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* === Category Filters === */
+        .category-filters {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--border-color);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* === Masonry Grid === */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 10px; /* Controls the row height */
+            gap: 1.5rem;
+        }
+
+        .masonry-item {
+            break-inside: avoid; /* Prevent item splitting */
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Different item sizes */
+        .masonry-item.small {
+            grid-row-end: span 30; /* 30 * 10px = 300px */
+        }
+        .masonry-item.medium {
+            grid-row-end: span 45; /* 450px */
+        }
+        .masonry-item.large {
+            grid-row-end: span 60; /* 600px */
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 0;
+            object-fit: cover;
+        }
+
+        /* Image heights based on card size */
+        .small .card-image { padding-bottom: 50%; } /* 1:2 aspect ratio */
+        .medium .card-image { padding-bottom: 75%; }
+        .large .card-image { padding-bottom: 100%; } /* 1:1 */
+
+        .card-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .card-category {
+            display: inline-block;
+            background-color: var(--border-color);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-top: auto;
+        }
+
+        /* === Footer === */
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .masonry-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .masonry-item.small,
+            .masonry-item.medium,
+            .masonry-item.large {
+                grid-row-end: auto;
+                height: auto;
+            }
+            
+            .small .card-image,
+            .medium .card-image,
+            .large .card-image {
+                padding-bottom: 60%; /* Uniform height on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="#" class="logo">Masonry</a>
+            <button class="theme-toggle">🌓</button>
+        </header>
+
+        <!-- Category Filters -->
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="design">Design</button>
+            <button class="filter-btn" data-category="tech">Technology</button>
+            <button class="filter-btn" data-category="business">Business</button>
+            <button class="filter-btn" data-category="art">Art</button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-grid" id="masonryGrid">
+            <!-- Card 1 (Large) -->
+            <div class="masonry-item large" data-category="design" style="animation-delay: 0.1s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Design" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Design</span>
+                        <h3 class="card-title">The Evolution of Minimalism in Digital Interfaces</h3>
+                        <p class="card-excerpt">How minimalist design principles have shaped user experiences from the early days of the web to modern applications. We explore the balance between simplicity and functionality.</p>
+                        <div class="card-meta">
+                            <span>June 15, 2023</span>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 2 (Small) -->
+            <div class="masonry-item small" data-category="tech" style="animation-delay: 0.2s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tech" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">React 19 Preview</h3>
+                        <p class="card-excerpt">What to expect in the next major version of React.</p>
+                        <div class="card-meta">
+                            <span>June 12, 2023</span>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 3 (Medium) -->
+            <div class="masonry-item medium" data-category="business" style="animation-delay: 0.3s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Business" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Business</span>
+                        <h3 class="card-title">Remote Work Culture in 2023</h3>
+                        <p class="card-excerpt">How companies are adapting to hybrid work models and the tools that make distributed teams more effective than ever before.</p>
+                        <div class="card-meta">
+                            <span>June 10, 2023</span>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 4 (Small) -->
+            <div class="masonry-item small" data-category="art" style="animation-delay: 0.4s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Art" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Art</span>
+                        <h3 class="card-title">Street Typography</h3>
+                        <p class="card-excerpt">Exploring urban letterforms and their cultural significance.</p>
+                        <div class="card-meta">
+                            <span>June 8, 2023</span>
+                            <span>4 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 5 (Medium) -->
+            <div class="masonry-item medium" data-category="design" style="animation-delay: 0.5s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Design" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Design</span>
+                        <h3 class="card-title">Color Psychology in UI Design</h3>
+                        <p class="card-excerpt">How different hues affect user behavior and emotional responses, with practical examples from successful products.</p>
+                        <div class="card-meta">
+                            <span>June 5, 2023</span>
+                            <span>9 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 6 (Large) -->
+            <div class="masonry-item large" data-category="tech" style="animation-delay: 0.6s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Tech" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">The Future of Web Animation</h3>
+                        <p class="card-excerpt">Exploring emerging technologies like WebGL and WebGPU that are pushing the boundaries of what's possible in browser-based animations and interactive experiences. We look at performance considerations and accessibility best practices.</p>
+                        <div class="card-meta">
+                            <span>June 1, 2023</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 7 (Small) -->
+            <div class="masonry-item small" data-category="business" style="animation-delay: 0.7s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Business" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Business</span>
+                        <h3 class="card-title">Startup Funding Trends</h3>
+                        <p class="card-excerpt">Current investment patterns in the tech sector.</p>
+                        <div class="card-meta">
+                            <span>May 28, 2023</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Card 8 (Medium) -->
+            <div class="masonry-item medium" data-category="art" style="animation-delay: 0.8s">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Art" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Art</span>
+                        <h3 class="card-title">Digital vs Traditional Illustration</h3>
+                        <p class="card-excerpt">How modern tools are changing artistic workflows while traditional techniques maintain their relevance in the digital age.</p>
+                        <div class="card-meta">
+                            <span>May 25, 2023</span>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Masonry Grid Blog. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const masonryItems = document.querySelectorAll('.masonry-item');
+            
+            // Theme Toggle
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌓';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '🌞';
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '🌞';
+            }
+            
+            // Filter Buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    // Filter items
+                    masonryItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Animate items on scroll
+            function animateOnScroll() {
+                masonryItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (itemTop < windowHeight - 100) {
+                        item.style.opacity = '1';
+                    }
+                });
+            }
+            
+            // Initial animation
+            animateOnScroll();
+            
+            // Animate on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>

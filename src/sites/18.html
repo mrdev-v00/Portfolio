@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Plan</title>
+  <style>
+    /* === CSS RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    /* === VARIABLES === */
+    :root {
+      --primary: #4361ee;
+      --primary-light: #e6e9ff;
+      --primary-dark: #3a56d4;
+      --secondary: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --border: #dee2e6;
+      --success: #4bb543;
+    }
+
+    /* === BASE STYLES === */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7ff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* === HEADER === */
+    .pricing-header {
+      text-align: center;
+      padding: 3rem 0 2rem;
+    }
+
+    .pricing-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .pricing-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* === TOGGLE SWITCH === */
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .toggle-label {
+      margin: 0 1rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    .toggle-label.active {
+      color: var(--primary);
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--light-gray);
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+
+    /* === PRICING PLANS === */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .pricing-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .pricing-card.popular {
+      border: 2px solid var(--primary);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.25rem 1rem;
+      border-radius: 0 0 5px 5px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .pricing-card-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .pricing-card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .pricing-card-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .pricing-card-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray);
+    }
+
+    .pricing-card-desc {
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-card-body {
+      padding: 2rem;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .features-list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .features-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .features-list li.disabled {
+      color: var(--gray);
+      opacity: 0.6;
+    }
+
+    .features-list li.disabled:before {
+      content: "✕";
+      color: var(--gray);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-light);
+    }
+
+    /* === FEATURE COMPARISON === */
+    .feature-comparison {
+      margin-bottom: 4rem;
+    }
+
+    .comparison-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .comparison-table th {
+      background-color: var(--light);
+      font-weight: 600;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .feature-name {
+      font-weight: 500;
+    }
+
+    .feature-value {
+      text-align: center;
+    }
+
+    .feature-value .tick {
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .feature-value .cross {
+      color: var(--gray);
+      opacity: 0.6;
+    }
+
+    /* === FAQ === */
+    .faq-section {
+      margin-bottom: 4rem;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      background-color: white;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer-content {
+      padding: 0 0 1.5rem;
+      color: var(--gray);
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+    }
+
+    /* === FOOTER === */
+    .pricing-footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--gray);
+    }
+
+    .pricing-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .pricing-title {
+        font-size: 2rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Pricing Header -->
+    <header class="pricing-header">
+      <h1 class="pricing-title">Choose Your Plan</h1>
+      <p class="pricing-subtitle">Select the perfect plan for your needs. Upgrade, downgrade, or cancel anytime.</p>
+      
+      <!-- Toggle Switch -->
+      <div class="toggle-container">
+        <span class="toggle-label active" id="monthly-label">Monthly</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="billing-toggle">
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-label" id="annual-label">Annual (Save 20%)</span>
+      </div>
+    </header>
+
+    <!-- Pricing Plans -->
+    <div class="pricing-grid">
+      <!-- Basic Plan -->
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <h3 class="pricing-card-title">Basic</h3>
+          <div class="pricing-card-price monthly-price">$9<span>/mo</span></div>
+          <div class="pricing-card-price annual-price" style="display: none;">$7<span>/mo</span></div>
+          <p class="pricing-card-desc">Perfect for individuals getting started</p>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="features-list">
+            <li>10 projects</li>
+            <li>5GB storage</li>
+            <li>Basic analytics</li>
+            <li>Email support</li>
+            <li class="disabled">API access</li>
+            <li class="disabled">Priority support</li>
+          </ul>
+          <button class="btn btn-outline">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Pro Plan (Popular) -->
+      <div class="pricing-card popular">
+        <div class="popular-badge">Most Popular</div>
+        <div class="pricing-card-header">
+          <h3 class="pricing-card-title">Pro</h3>
+          <div class="pricing-card-price monthly-price">$19<span>/mo</span></div>
+          <div class="pricing-card-price annual-price" style="display: none;">$15<span>/mo</span></div>
+          <p class="pricing-card-desc">For growing teams and businesses</p>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="features-list">
+            <li>Unlimited projects</li>
+            <li>50GB storage</li>
+            <li>Advanced analytics</li>
+            <li>Email + chat support</li>
+            <li>API access</li>
+            <li class="disabled">Priority support</li>
+          </ul>
+          <button class="btn">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <h3 class="pricing-card-title">Enterprise</h3>
+          <div class="pricing-card-price monthly-price">$49<span>/mo</span></div>
+          <div class="pricing-card-price annual-price" style="display: none;">$39<span>/mo</span></div>
+          <p class="pricing-card-desc">For large organizations</p>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="features-list">
+            <li>Unlimited projects</li>
+            <li>500GB storage</li>
+            <li>Advanced analytics</li>
+            <li>24/7 support</li>
+            <li>API access</li>
+            <li>Priority support</li>
+          </ul>
+          <button class="btn btn-outline">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Comparison -->
+    <section class="feature-comparison">
+      <h2 class="comparison-title">Plan Comparison</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Basic</th>
+            <th>Pro</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Projects</td>
+            <td class="feature-value">10</td>
+            <td class="feature-value">Unlimited</td>
+            <td class="feature-value">Unlimited</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Storage</td>
+            <td class="feature-value">5GB</td>
+            <td class="feature-value">50GB</td>
+            <td class="feature-value">500GB</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Analytics</td>
+            <td class="feature-value"><span class="tick">✓</span></td>
+            <td class="feature-value"><span class="tick">✓</span></td>
+            <td class="feature-value"><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">API Access</td>
+            <td class="feature-value"><span class="cross">✕</span></td>
+            <td class="feature-value"><span class="tick">✓</span></td>
+            <td class="feature-value"><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Support</td>
+            <td class="feature-value">Email</td>
+            <td class="feature-value">Email + Chat</td>
+            <td class="feature-value">24/7 Priority</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I change plans later?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, you can upgrade or downgrade your plan at any time. Your billing will be prorated based on the changes.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What payment methods do you accept?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual plans.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is there a free trial available?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, we offer a 14-day free trial for all plans. No credit card is required to start your trial.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I cancel my subscription?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            You can cancel anytime from your account settings. After cancellation, you'll retain access until the end of your billing period.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pricing-footer">
+      <p>Need help choosing? <a href="#">Contact our sales team</a></p>
+      <p>© 2023 Company Name. All rights reserved. <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // === JAVASCRIPT ===
+    document.addEventListener('DOMContentLoaded', function() {
+      // Billing toggle functionality
+      const billingToggle = document.getElementById('billing-toggle');
+      const monthlyLabel = document.getElementById('monthly-label');
+      const annualLabel = document.getElementById('annual-label');
+      const monthlyPrices = document.querySelectorAll('.monthly-price');
+      const annualPrices = document.querySelectorAll('.annual-price');
+      
+      billingToggle.addEventListener('change', function() {
+        if (this.checked) {
+          monthlyLabel.classList.remove('active');
+          annualLabel.classList.add('active');
+          monthlyPrices.forEach(el => el.style.display = 'none');
+          annualPrices.forEach(el => el.style.display = 'block');
+        } else {
+          monthlyLabel.classList.add('active');
+          annualLabel.classList.remove('active');
+          monthlyPrices.forEach(el => el.style.display = 'block');
+          annualPrices.forEach(el => el.style.display = 'none');
+        }
+      });
+      
+      // FAQ accordion functionality
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+          // Close all other items
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // Toggle current item
+          item.classList.toggle('active');
+          
+          // Update plus/minus icon
+          const icon = question.querySelector('span:last-child');
+          icon.textContent = item.classList.contains('active') ? '−' : '+';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

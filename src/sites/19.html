@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Comparison</title>
+  <style>
+    /* === CSS RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    /* === VARIABLES === */
+    :root {
+      --primary: #4361ee;
+      --primary-light: #e6e9ff;
+      --primary-dark: #3a56d4;
+      --secondary: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --border: #dee2e6;
+      --success: #4bb543;
+      --warning: #ffcc00;
+      --danger: #ff3333;
+    }
+
+    /* === BASE STYLES === */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7ff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* === HEADER === */
+    .comparison-header {
+      text-align: center;
+      padding: 3rem 0 2rem;
+    }
+
+    .comparison-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === COMPARISON SLIDER === */
+    .comparison-container {
+      position: relative;
+      margin: 3rem 0;
+      overflow: hidden;
+    }
+
+    .comparison-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+
+    .comparison-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .comparison-item {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      margin-right: 1.5rem;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .comparison-item:last-child {
+      margin-right: 0;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      padding: 1rem;
+      background-color: var(--light);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .product-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-features li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .product-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* === FEATURE TABLE === */
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 3rem;
+    }
+
+    .feature-table th,
+    .feature-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .feature-table th {
+      background-color: var(--light);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+
+    .feature-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .feature-name {
+      font-weight: 500;
+      width: 200px;
+    }
+
+    .feature-value {
+      text-align: center;
+    }
+
+    .feature-value .tick {
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .feature-value .cross {
+      color: var(--gray);
+      opacity: 0.6;
+    }
+
+    /* === SLIDER CONTROLS === */
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .slider-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .slider-btn:hover {
+      background-color: var(--light);
+    }
+
+    /* === DRAG HANDLE === */
+    .drag-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: grab;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .comparison-item {
+        flex: 0 0 250px;
+      }
+      
+      .feature-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="comparison-header">
+      <h1 class="comparison-title">Compare Our Products</h1>
+      <p class="comparison-subtitle">Slide to compare features and find the perfect product for your needs</p>
+    </header>
+
+    <!-- Product Slider -->
+    <div class="comparison-container">
+      <div class="comparison-slider" id="comparison-slider">
+        <!-- Product 1 -->
+        <div class="comparison-item">
+          <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Basic Plan" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Basic Plan</h3>
+            <div class="product-price">$9.99/mo</div>
+            <ul class="product-features">
+              <li>10 projects included</li>
+              <li>5GB storage</li>
+              <li>Basic support</li>
+              <li>Email assistance</li>
+            </ul>
+            <button class="btn">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="comparison-item">
+          <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Pro Plan" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Pro Plan</h3>
+            <div class="product-price">$19.99/mo</div>
+            <ul class="product-features">
+              <li>Unlimited projects</li>
+              <li>50GB storage</li>
+              <li>Priority support</li>
+              <li>24/7 chat assistance</li>
+              <li>Advanced analytics</li>
+            </ul>
+            <button class="btn">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="comparison-item">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Enterprise Plan" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">Enterprise Plan</h3>
+            <div class="product-price">$49.99/mo</div>
+            <ul class="product-features">
+              <li>Unlimited projects</li>
+              <li>500GB storage</li>
+              <li>VIP support</li>
+              <li>Dedicated account manager</li>
+              <li>Advanced analytics</li>
+              <li>API access</li>
+              <li>Custom integrations</li>
+            </ul>
+            <button class="btn">Contact Sales</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Controls -->
+    <div class="slider-controls">
+      <button class="slider-btn" id="prev-btn">❮</button>
+      <button class="slider-btn" id="next-btn">❯</button>
+    </div>
+
+    <!-- Feature Comparison Table -->
+    <table class="feature-table">
+      <thead>
+        <tr>
+          <th class="feature-name">Feature</th>
+          <th class="feature-value">Basic</th>
+          <th class="feature-value">Pro</th>
+          <th class="feature-value">Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature-name">Projects</td>
+          <td class="feature-value">10</td>
+          <td class="feature-value">Unlimited</td>
+          <td class="feature-value">Unlimited</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Storage</td>
+          <td class="feature-value">5GB</td>
+          <td class="feature-value">50GB</td>
+          <td class="feature-value">500GB</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Support</td>
+          <td class="feature-value">Email</td>
+          <td class="feature-value">Priority</td>
+          <td class="feature-value">VIP</td>
+        </tr>
+        <tr>
+          <td class="feature-name">Analytics</td>
+          <td class="feature-value"><span class="cross">✕</span></td>
+          <td class="feature-value"><span class="tick">✓</span></td>
+          <td class="feature-value"><span class="tick">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feature-name">API Access</td>
+          <td class="feature-value"><span class="cross">✕</span></td>
+          <td class="feature-value"><span class="cross">✕</span></td>
+          <td class="feature-value"><span class="tick">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feature-name">Custom Integrations</td>
+          <td class="feature-value"><span class="cross">✕</span></td>
+          <td class="feature-value"><span class="cross">✕</span></td>
+          <td class="feature-value"><span class="tick">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // === JAVASCRIPT ===
+    document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.getElementById('comparison-slider');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const items = document.querySelectorAll('.comparison-item');
+      let currentIndex = 0;
+      const itemWidth = items[0].offsetWidth + 24; // Include margin
+
+      // Navigation buttons
+      nextBtn.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % items.length;
+        scrollToItem(currentIndex);
+      });
+
+      prevBtn.addEventListener('click', function() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        scrollToItem(currentIndex);
+      });
+
+      function scrollToItem(index) {
+        slider.scrollTo({
+          left: index * itemWidth,
+          behavior: 'smooth'
+        });
+      }
+
+      // Drag functionality
+      let isDragging = false;
+      let startPos = 0;
+      let currentScroll = 0;
+
+      slider.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        startPos = e.pageX;
+        currentScroll = slider.scrollLeft;
+        slider.style.cursor = 'grabbing';
+      });
+
+      slider.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const walk = (x - startPos) * 2;
+        slider.scrollLeft = currentScroll - walk;
+      });
+
+      slider.addEventListener('mouseup', function() {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+      });
+
+      slider.addEventListener('mouseleave', function() {
+        isDragging = false;
+      });
+
+      // Touch support
+      slider.addEventListener('touchstart', function(e) {
+        isDragging = true;
+        startPos = e.touches[0].pageX;
+        currentScroll = slider.scrollLeft;
+      });
+
+      slider.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX;
+        const walk = (x - startPos) * 2;
+        slider.scrollLeft = currentScroll - walk;
+      });
+
+      slider.addEventListener('touchend', function() {
+        isDragging = false;
+      });
+
+      // Update current index on scroll
+      slider.addEventListener('scroll', function() {
+        const newIndex = Math.round(slider.scrollLeft / itemWidth);
+        if (newIndex !== currentIndex) {
+          currentIndex = newIndex;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

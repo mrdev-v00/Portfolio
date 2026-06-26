@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Blog</title>
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #4361ee;
+            --secondary-color: #e9ecef;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === Smooth Page Transitions === */
+        .main-content {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .main-content.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* === Header === */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-color);
+            z-index: 100;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* === Hero Section === */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* === Blog Grid === */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: translateY(0);
+            transition: var(--transition);
+            animation: fadeInUp 0.6s ease;
+            animation-fill-mode: both;
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.3s; }
+        .blog-card:nth-child(2) { animation-delay: 0.4s; }
+        .blog-card:nth-child(3) { animation-delay: 0.5s; }
+        .blog-card:nth-child(4) { animation-delay: 0.6s; }
+        .blog-card:nth-child(5) { animation-delay: 0.7s; }
+        .blog-card:nth-child(6) { animation-delay: 0.8s; }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--text-color);
+        }
+
+        /* === Article Page === */
+        .article-page {
+            padding: 8rem 0 4rem;
+            display: none;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* === Animations === */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === Footer === */
+        footer {
+            background: var(--secondary-color);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .copyright {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" id="homeLink">AnimatedBlog</a>
+                <nav class="nav-links">
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="articles">Articles</a>
+                    <a href="#" class="nav-link" data-page="about">About</a>
+                    <a href="#" class="nav-link" data-page="contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div class="main-content" id="homePage">
+            <section class="hero">
+                <div class="container">
+                    <h1>Welcome to Animated Blog</h1>
+                    <p>Discover insightful articles with beautiful transitions and smooth animations for an enhanced reading experience.</p>
+                </div>
+            </section>
+
+            <div class="container">
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Blog Card 1 -->
+                    <article class="blog-card" data-article="1">
+                        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Design" class="card-image">
+                        <div class="card-content">
+                            <span class="card-category">Design</span>
+                            <h3 class="card-title">The Psychology of Color in Web Design</h3>
+                            <p class="card-excerpt">How color choices affect user behavior and what you should consider for your next project.</p>
+                            <a href="#" class="read-more" data-article="1">Read more →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 2 -->
+                    <article class="blog-card" data-article="2">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Development" class="card-image">
+                        <div class="card-content">
+                            <span class="card-category">Development</span>
+                            <h3 class="card-title">Modern JavaScript Techniques You Should Know</h3>
+                            <p class="card-excerpt">Explore the latest ES2023 features that will make your code cleaner and more efficient.</p>
+                            <a href="#" class="read-more" data-article="2">Read more →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 3 -->
+                    <article class="blog-card" data-article="3">
+                        <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Animation" class="card-image">
+                        <div class="card-content">
+                            <span class="card-category">Animation</span>
+                            <h3 class="card-title">Creating Smooth UI Transitions</h3>
+                            <p class="card-excerpt">Learn how to implement buttery-smooth animations that enhance user experience without being distracting.</p>
+                            <a href="#" class="read-more" data-article="3">Read more →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Page (Hidden by default) -->
+        <div class="main-content hidden" id="articlePage">
+            <div class="container">
+                <div class="article-page" id="articleContainer">
+                    <!-- Article content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+            <p class="copyright">© 2023 Animated Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const homePage = document.getElementById('homePage');
+            const articlePage = document.getElementById('articlePage');
+            const articleContainer = document.getElementById('articleContainer');
+            const blogCards = document.querySelectorAll('.blog-card');
+            const readMoreLinks = document.querySelectorAll('.read-more');
+            const homeLink = document.getElementById('homeLink');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Mock article data
+            const articles = {
+                1: {
+                    title: "The Psychology of Color in Web Design",
+                    category: "Design",
+                    date: "June 15, 2023",
+                    readTime: "8 min read",
+                    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    content: `
+                        <p>Color is one of the most powerful tools in a designer's toolkit. It can influence mood, direct attention, and even affect decision-making. In this article, we'll explore how different colors impact user behavior and how you can leverage this knowledge in your web design projects.</p>
+                        
+                        <p>Research shows that up to 90% of snap judgments made about products can be based on color alone. This means your color choices are making an immediate impression on your visitors, whether you intend them to or not.</p>
+                        
+                        <p>Warm colors like red, orange, and yellow tend to create a sense of energy and urgency. That's why they're often used for "Buy Now" buttons or sale announcements. Cool colors like blue and green, on the other hand, promote calmness and trust—perfect for financial or healthcare websites.</p>
+                    `
+                },
+                2: {
+                    title: "Modern JavaScript Techniques You Should Know",
+                    category: "Development",
+                    date: "June 10, 2023",
+                    readTime: "12 min read",
+                    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    content: `
+                        <p>JavaScript continues to evolve at a rapid pace, with new features being added regularly. Staying up-to-date with these changes can significantly improve your code quality and development speed. Here are some of the most useful modern JavaScript techniques you should be using.</p>
+                        
+                        <p>Optional chaining (?.) is a game-changer for working with nested objects. Instead of writing lengthy conditional checks, you can now safely access deeply nested properties with a simple syntax: <code>user?.address?.street</code>. If any part of the chain is null or undefined, the expression short-circuits and returns undefined instead of throwing an error.</p>
+                        
+                        <p>Nullish coalescing (??) is another powerful operator that provides a default value only when the left-hand side is null or undefined. Unlike the logical OR (||) operator, it doesn't coerce falsy values like 0 or empty strings.</p>
+                    `
+                },
+                3: {
+                    title: "Creating Smooth UI Transitions",
+                    category: "Animation",
+                    date: "June 5, 2023",
+                    readTime: "10 min read",
+                    image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    content: `
+                        <p>In today's digital landscape, users expect seamless and intuitive interfaces. Well-crafted animations can guide users through your application, provide feedback, and create a sense of direct manipulation. But how do you create animations that enhance rather than distract?</p>
+                        
+                        <p>The key to good UI animation is understanding timing and easing. Linear animations (where movement happens at a constant speed) feel robotic and unnatural. Instead, use easing functions that mimic real-world physics. The <code>cubic-bezier(0.16, 1, 0.3, 1)</code> function is particularly effective for creating "snappy" yet natural animations.</p>
+                        
+                        <p>When animating between states, consider using the FLIP technique (First, Last, Invert, Play). This approach calculates the difference between an element's starting and ending positions, then uses transforms to animate between them. It's highly performant because it offloads most of the work to the GPU.</p>
+                    `
+                }
+            };
+            
+            // Handle article clicks
+            function showArticle(articleId) {
+                // Hide home page with animation
+                homePage.classList.add('hidden');
+                
+                // Show article page with animation after a short delay
+                setTimeout(() => {
+                    const article = articles[articleId];
+                    
+                    articleContainer.innerHTML = `
+                        <a href="#" class="back-btn" id="backBtn">← Back to articles</a>
+                        <div class="article-header">
+                            <span class="card-category">${article.category}</span>
+                            <h1 class="article-title">${article.title}</h1>
+                            <div class="article-meta">
+                                <span>${article.date}</span>
+                                <span>${article.readTime}</span>
+                            </div>
+                        </div>
+                        <img src="${article.image}" alt="${article.title}" class="article-image">
+                        <div class="article-content">
+                            ${article.content}
+                        </div>
+                    `;
+                    
+                    articlePage.classList.remove('hidden');
+                    
+                    // Smooth scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Add back button event
+                    document.getElementById('backBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        goBack();
+                    });
+                }, 300);
+            }
+            
+            // Handle back button
+            function goBack() {
+                articlePage.classList.add('hidden');
+                
+                setTimeout(() => {
+                    homePage.classList.remove('hidden');
+                    
+                    // Smooth scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            }
+            
+            // Add click events to blog cards
+            blogCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const articleId = this.dataset.article;
+                    showArticle(articleId);
+                });
+            });
+            
+            // Add click events to read more links
+            readMoreLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.dataset.article;
+                    showArticle(articleId);
+                });
+            });
+            
+            // Home link event
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (homePage.classList.contains('hidden')) {
+                    goBack();
+                }
+            });
+            
+            // Navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    
+                    // In a real app, this would load different pages
+                    alert(`Navigating to ${page} page`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

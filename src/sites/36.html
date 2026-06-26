@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penumbra | Dark Academia Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Dark Academia Color Palette */
+            --bg-color: #1a1a1a;
+            --text-color: #e8e8e8;
+            --accent-color: #c19a6b;
+            --secondary-color: #3d3d3d;
+            --card-bg: #252525;
+            --border-color: #3d3d3d;
+            --highlight: rgba(193, 154, 107, 0.2);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s ease;
+            
+            /* Typography */
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-ui: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+        }
+
+        /* === Typography === */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        h1 { font-size: 2.5rem; letter-spacing: -0.5px; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1.5rem; }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .text-lead {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* === Header === */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-ui);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            border-bottom: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* === Hero === */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* === Article Grid === */
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-excerpt {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* === Featured Article === */
+        .featured-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            background: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-category {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* === Newsletter === */
+        .newsletter {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+        }
+
+        .newsletter-button {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0 2rem;
+            font-family: var(--font-ui);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        /* === Footer === */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <a href="#" class="logo">Penumbra</a>
+                <nav class="nav-links">
+                    <a href="#">Essays</a>
+                    <a href="#">Literature</a>
+                    <a href="#">Philosophy</a>
+                    <a href="#">History</a>
+                    <a href="#">About</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>The Dark Academia Journal</h1>
+            <p class="text-lead">Exploring literature, philosophy, and the melancholy beauty of forgotten knowledge</p>
+            <p>In the quiet hours between midnight and dawn, when the world sleeps and the mind wanders, we find the most profound truths hidden in ancient texts and crumbling manuscripts.</p>
+        </section>
+
+        <!-- Featured Article -->
+        <article class="featured-article">
+            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Ancient Books" class="featured-image">
+            <div class="featured-content">
+                <span class="featured-category">Literature</span>
+                <h2>The Lost Art of Marginalia</h2>
+                <p class="text-lead">How centuries of readers have conversed with texts through handwritten annotations in the margins of great works.</p>
+                <p>From medieval monks to Victorian scholars, marginal notes reveal intimate dialogues between readers and texts that span generations. These scribbled thoughts, corrections, and reactions form a palimpsest of intellectual history waiting to be deciphered.</p>
+                <a href="#" class="read-more">
+                    <span>Read Essay</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </article>
+
+        <!-- Article Grid -->
+        <div class="articles">
+            <!-- Article 1 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Library" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span>Philosophy</span>
+                        <span>June 15, 2023</span>
+                    </div>
+                    <h3 class="article-title">Nietzsche in the Stacks</h3>
+                    <p class="article-excerpt">Reexamining the philosopher's works through the lens of modern library science and archival practices.</p>
+                    <a href="#" class="read-more">
+                        <span>Continue Reading</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Writing" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span>History</span>
+                        <span>June 10, 2023</span>
+                    </div>
+                    <h3 class="article-title">Ink & Revolution</h3>
+                    <p class="article-excerpt">How clandestine publishing networks fueled intellectual revolutions from the Enlightenment to the 20th century.</p>
+                    <a href="#" class="read-more">
+                        <span>Continue Reading</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Study" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span>Essays</span>
+                        <span>June 5, 2023</span>
+                    </div>
+                    <h3 class="article-title">The Solitude of Deep Reading</h3>
+                    <p class="article-excerpt">In an age of constant distraction, reclaiming the lost art of immersive reading as a radical act of self-discovery.</p>
+                    <a href="#" class="read-more">
+                        <span>Continue Reading</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <h2>Subscribe to Our Letters</h2>
+            <p>Receive monthly essays, reading recommendations, and archival discoveries straight to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" class="newsletter-input">
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="#">Archive</a>
+                <a href="#">Reading List</a>
+                <a href="#">Contact</a>
+                <a href="#">Support</a>
+            </div>
+            <p class="copyright">© 2023 Penumbra Journal. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

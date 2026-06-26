@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice Law Firm | Professional Legal Services</title>
+    <meta name="description" content="Justice Law Firm provides expert legal services in corporate law, litigation, family law, and more.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+<style>
+/* CSS Reset and Base Styles */
+:root {
+    --primary-color: #1a365d;
+    --primary-dark: #0f2a4d;
+    --secondary-color: #d69e2e;
+    --accent-color: #2c5282;
+    --text-color: #2d3748;
+    --text-light: #718096;
+    --bg-color: #ffffff;
+    --bg-light: #f7fafc;
+    --bg-dark: #edf2f7;
+    --border-color: #e2e8f0;
+    --white: #ffffff;
+    --black: #000000;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: var(--transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+h1 { font-size: 4.8rem; }
+h2 { font-size: 3.6rem; }
+h3 { font-size: 2.8rem; }
+h4 { font-size: 2.2rem; }
+h5 { font-size: 1.8rem; }
+h6 { font-size: 1.6rem; }
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 8rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.section-title span {
+    color: var(--primary-color);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6rem;
+    height: 0.3rem;
+    background-color: var(--primary-color);
+    border-radius: 0.3rem;
+}
+
+.section-description {
+    max-width: 70rem;
+    margin: 0 auto;
+    color: var(--text-light);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 2.4rem;
+    border-radius: 0.4rem;
+    font-weight: 500;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-0.2rem);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    border: 0.1rem solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-0.2rem);
+    box-shadow: var(--shadow-md);
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.header.scrolled {
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.logo {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text-color);
+    font-family: 'Playfair Display', serif;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 0;
+    height: 0.2rem;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.phone-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.phone-link i {
+    color: var(--primary-color);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.4rem;
+    height: 1.8rem;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 0.2rem;
+    background-color: var(--text-color);
+    transition: var(--transition);
+}
+
+.hamburger.active span:first-child {
+    transform: translateY(0.8rem) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:last-child {
+    transform: translateY(-0.8rem) rotate(-45deg);
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 1000;
+    transition: var(--transition);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    left: 0;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 0.1rem solid var(--border-color);
+}
+
+.close-menu {
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mobile-nav-link {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid var(--border-color);
+}
+
+.mobile-phone-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 3rem;
+    padding: 1rem 0;
+}
+
+.mobile-phone-link i {
+    color: var(--primary-color);
+}
+
+/* Hero Section Styles */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 70rem;
+    display: flex;
+    align-items: center;
+    background: url('assets/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: var(--white);
+    padding-top: 8rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 60rem;
+}
+
+.hero-title {
+    font-size: 5.6rem;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Practice Highlights Styles */
+.practice-highlights {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 4rem 0;
+    position: relative;
+    z-index: 2;
+    margin-top: -5rem;
+}
+
+.highlight-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 3rem;
+}
+
+.highlight-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.4rem;
+    transition: var(--transition);
+}
+
+.highlight-card:hover {
+    transform: translateY(-0.5rem);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.highlight-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.highlight-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.highlight-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.4rem;
+}
+
+/* About Section Styles */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    border-radius: 0.4rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.about-badge {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    border-radius: 0.4rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.about-badge span:first-child {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.about-badge span:last-child {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.feature {
+    display: flex;
+    gap: 1rem;
+}
+
+.feature i {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-top: 0.3rem;
+}
+
+.feature h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature p {
+    font-size: 1.4rem;
+}
+
+/* Practice Areas Styles */
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+}
+
+.practice-card {
+    padding: 3rem;
+    border-radius: 0.4rem;
+    background-color: var(--bg-light);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.practice-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4rem;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.practice-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-md);
+}
+
+.practice-card:hover::before {
+    width: 100%;
+    opacity: 0.1;
+}
+
+.practice-icon {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.practice-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.practice-card p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.practice-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+/* Why Choose Us Styles */
+.why-choose-us {
+    background-color: var(--bg-light);
+}
+
+.why-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.why-features {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.why-feature {
+    display: flex;
+    gap: 2rem;
+}
+
+.feature-number {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+}
+
+.feature-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-content p {
+    font-size: 1.4rem;
+}
+
+.why-image {
+    position: relative;
+}
+
+.why-image img {
+    border-radius: 0.4rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    border-radius: 0.4rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.experience-badge span:first-child {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.experience-badge span:last-child {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+/* Attorneys Styles */
+.attorneys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 3rem;
+}
+
+.attorney-card {
+    background-color: var(--bg-light);
+    border-radius: 0.4rem;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.attorney-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-md);
+}
+
+.attorney-image {
+    position: relative;
+    height: 30rem;
+    overflow: hidden;
+}
+
+.attorney-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.attorney-card:hover .attorney-image img {
+    transform: scale(1.05);
+}
+
+.attorney-social {
+    position: absolute;
+    bottom: -5rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: var(--transition);
+}
+
+.attorney-card:hover .attorney-social {
+    bottom: 0;
+}
+
+.attorney-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.attorney-social a:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.attorney-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.attorney-info h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.attorney-title {
+    font-size: 1.4rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.attorney-specialty {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.1rem solid var(--border-color);
+}
+
+.attorney-profile {
+    display: inline-block;
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+/* Testimonials Styles */
+.testimonials {
+    background-color: var(--bg-light);
+}
+
+.testimonial-slider {
+    max-width: 80rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.testimonial-slide {
+    display: none;
+    animation: fade 0.5s ease;
+}
+
+.testimonial-slide.active {
+    display: block;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.testimonial-content {
+    background-color: var(--bg-color);
+    padding: 4rem;
+    border-radius: 0.4rem;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.testimonial-quote {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.testimonial-quote i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    opacity: 0.3;
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+}
+
+.testimonial-quote p {
+    font-size: 1.6rem;
+    font-style: italic;
+    padding-left: 3rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.testimonial-author img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info h4 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.author-info p {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-rating {
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+}
+
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testimonial-prev,
+.testimonial-next {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.testimonial-prev:hover,
+.testimonial-next:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.testimonial-dots {
+    display: flex;
+    gap: 1rem;
+}
+
+.dot {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+}
+
+/* Case Results Styles */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 3rem;
+}
+
+.result-card {
+    padding: 3rem;
+    text-align: center;
+    background-color: var(--bg-light);
+    border-radius: 0.4rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.4rem;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.result-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-md);
+}
+
+.result-card:hover::before {
+    height: 100%;
+    opacity: 0.1;
+}
+
+.result-card h3 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.result-card p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.result-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.disclaimer {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Blog Styles */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+}
+
+.blog-card {
+    background-color: var(--bg-light);
+    border-radius: 0.4rem;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.blog-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-md);
+}
+
+.blog-image {
+    position: relative;
+    height: 20rem;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-date {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.4rem;
+}
+
+.blog-date span:first-child {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.blog-date span:last-child {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.blog-content {
+    padding: 2rem;
+}
+
+.blog-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content h3 a {
+    color: var(--text-color);
+}
+
+.blog-content h3 a:hover {
+    color: var(--primary-color);
+}
+
+.blog-excerpt {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.blog-cta {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+/* Contact Styles */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+}
+
+.contact-info {
+    max-width: 50rem;
+}
+
+.contact-description {
+    margin-bottom: 3rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.contact-method {
+    display: flex;
+    gap: 2rem;
+}
+
+.method-icon {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.method-info h4 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.method-info p {
+    font-size: 1.4rem;
+}
+
+.contact-social {
+    margin-top: 3rem;
+}
+
+.contact-social h4 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.contact-form-container {
+    background-color: var(--bg-light);
+    padding: 4rem;
+    border-radius: 0.4rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1.5rem;
+    border: 0.1rem solid var(--border-color);
+    border-radius: 0.4rem;
+    background-color: var(--bg-color);
+    font-family: inherit;
+    font-size: 1.4rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(26, 54, 93, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 12rem;
+}
+
+.form-group label {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    color: var(--text-light);
+    font-size: 1.4rem;
+    pointer-events: none;
+    transition: var(--transition);
+    background-color: var(--bg-color);
+    padding: 0 0.5rem;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    top: -1rem;
+    left: 1rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: 6rem 0 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 5rem;
+    margin-bottom: 6rem;
+}
+
+.footer-about .logo {
+    color: var(--white);
+    margin-bottom: 2rem;
+}
+
+.footer-about p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-social a {
+    width: 4rem;
+    height: 4rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.footer h3 {
+    color: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.footer h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 4rem;
+    height: 0.2rem;
+    background-color: var(--secondary-color);
+}
+
+.footer ul li {
+    margin-bottom: 1rem;
+}
+
+.footer ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.4rem;
+    transition: var(--transition);
+}
+
+.footer ul li a:hover {
+    color: var(--white);
+    padding-left: 0.5rem;
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 1.2rem;
+    border: none;
+    border-radius: 0.4rem 0 0 0.4rem;
+    font-family: inherit;
+    font-size: 1.4rem;
+}
+
+.newsletter-form button {
+    width: 4.5rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 0 0.4rem 0.4rem 0;
+    transition: var(--transition);
+}
+
+.newsletter-form button:hover {
+    background-color: var(--white);
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    padding: 2rem 0;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-legal {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-legal a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.footer-legal a:hover {
+    color: var(--white);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-0.5rem);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    html {
+        font-size: 58%;
+    }
+    
+    .about-content,
+    .why-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-image,
+    .why-image {
+        margin-bottom: 3rem;
+    }
+    
+    .about-image,
+    .why-image,
+    .contact-info {
+        justify-self: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links,
+    .phone-link {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .hero-title {
+        font-size: 4.8rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 55%;
+    }
+    
+    section {
+        padding: 6rem 0;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .testimonial-content {
+        padding: 3rem 2rem;
+    }
+    
+    .testimonial-author {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <span>Justice</span> Law Firm
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#practice-areas" class="nav-link">Practice Areas</a>
+                    <a href="#attorneys" class="nav-link">Attorneys</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <a href="tel:+15551234567" class="phone-link">
+                        <i class="fas fa-phone"></i> (555) 123-4567
+                    </a>
+                    <button class="hamburger" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">
+                <span>Justice</span> Law Firm
+            </a>
+            <button class="close-menu" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#home" class="mobile-nav-link active">Home</a>
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#practice-areas" class="mobile-nav-link">Practice Areas</a>
+            <a href="#attorneys" class="mobile-nav-link">Attorneys</a>
+            <a href="#testimonials" class="mobile-nav-link">Testimonials</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+            <a href="tel:+15551234567" class="mobile-phone-link">
+                <i class="fas fa-phone"></i> (555) 123-4567
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Expert Legal Representation You Can Trust</h1>
+                <p class="hero-subtitle">With over 25 years of combined experience, our team delivers exceptional legal services tailored to your unique needs.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Free Consultation</a>
+                    <a href="#practice-areas" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Practice Areas Highlights -->
+    <section class="practice-highlights">
+        <div class="container">
+            <div class="highlight-cards">
+                <!-- Highlight 1 -->
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Litigation</h3>
+                    <p>Effective courtroom representation for civil and criminal cases.</p>
+                </div>
+                
+                <!-- Highlight 2 -->
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Corporate Law</h3>
+                    <p>Comprehensive legal solutions for businesses of all sizes.</p>
+                </div>
+                
+                <!-- Highlight 3 -->
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Real Estate</h3>
+                    <p>Expert guidance for property transactions and disputes.</p>
+                </div>
+                
+                <!-- Highlight 4 -->
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Family Law</h3>
+                    <p>Compassionate handling of divorce, custody, and support matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="assets/about-image.jpg" alt="Our law firm team" loading="lazy">
+                    <div class="about-badge">
+                        <span>25+</span>
+                        <span>Years Experience</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">About <span>Justice Law Firm</span></h2>
+                    <p class="about-description">Founded in 1998, Justice Law Firm has established itself as a premier legal practice dedicated to providing exceptional representation and personalized service to our clients.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Client-Centered Approach</h4>
+                            <p>We prioritize your needs and goals in every case we handle.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Proven Results</h4>
+                            <p>Our track record speaks for itself with numerous successful cases.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Ethical Practice</h4>
+                            <p>We maintain the highest standards of professional conduct.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Personal Attention</h4>
+                            <p>You'll work directly with experienced attorneys, not paralegals.</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#attorneys" class="btn btn-primary">Meet Our Attorneys</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas Section -->
+    <section id="practice-areas" class="practice-areas">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our <span>Practice Areas</span></h2>
+                <p class="section-description">Comprehensive legal services across multiple specialties</p>
+            </div>
+            
+            <div class="practice-grid">
+                <!-- Practice Area 1 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Criminal Defense</h3>
+                    <p>Aggressive representation for all criminal charges from misdemeanors to felonies.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Practice Area 2 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Business Law</h3>
+                    <p>Formation, contracts, compliance, and litigation for businesses.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Practice Area 3 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Real Estate</h3>
+                    <p>Transactions, disputes, zoning, and landlord-tenant matters.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Practice Area 4 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Family Law</h3>
+                    <p>Divorce, child custody, support, and adoption services.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Practice Area 5 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-user-injured"></i>
+                    </div>
+                    <h3>Personal Injury</h3>
+                    <p>Compensation for accidents, medical malpractice, and wrongful death.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Practice Area 6 -->
+                <div class="practice-card">
+                    <div class="practice-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Estate Planning</h3>
+                    <p>Wills, trusts, probate, and elder law services.</p>
+                    <a href="#" class="practice-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why <span>Choose Us</span></h2>
+            </div>
+            
+            <div class="why-content">
+                <div class="why-features">
+                    <div class="why-feature">
+                        <div class="feature-number">01</div>
+                        <div class="feature-content">
+                            <h3>Experienced Attorneys</h3>
+                            <p>Our lawyers have decades of combined experience across various legal fields.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="why-feature">
+                        <div class="feature-number">02</div>
+                        <div class="feature-content">
+                            <h3>Personalized Attention</h3>
+                            <p>We limit our caseload to ensure each client receives the attention they deserve.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="why-feature">
+                        <div class="feature-number">03</div>
+                        <div class="feature-content">
+                            <h3>Aggressive Advocacy</h3>
+                            <p>We fight tirelessly to protect our clients' rights and interests.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="why-feature">
+                        <div class="feature-number">04</div>
+                        <div class="feature-content">
+                            <h3>Transparent Fees</h3>
+                            <p>Clear, upfront pricing with multiple payment options available.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-image">
+                    <img src="assets/why-choose-us.jpg" alt="Attorney meeting with clients" loading="lazy">
+                    <div class="experience-badge">
+                        <span>500+</span>
+                        <span>Cases Handled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attorneys Section -->
+    <section id="attorneys" class="attorneys">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our <span>Attorneys</span></h2>
+                <p class="section-description">Meet our team of dedicated legal professionals</p>
+            </div>
+            
+            <div class="attorneys-grid">
+                <!-- Attorney 1 -->
+                <div class="attorney-card">
+                    <div class="attorney-image">
+                        <img src="assets/attorneys/attorney1.jpg" alt="Robert Johnson" loading="lazy">
+                        <div class="attorney-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="attorney-info">
+                        <h3>Robert Johnson</h3>
+                        <p class="attorney-title">Senior Partner</p>
+                        <p class="attorney-specialty">Criminal Defense, Litigation</p>
+                        <a href="#" class="attorney-profile">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Attorney 2 -->
+                <div class="attorney-card">
+                    <div class="attorney-image">
+                        <img src="assets/attorneys/attorney2.jpg" alt="Sarah Williams" loading="lazy">
+                        <div class="attorney-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="attorney-info">
+                        <h3>Sarah Williams</h3>
+                        <p class="attorney-title">Partner</p>
+                        <p class="attorney-specialty">Family Law, Estate Planning</p>
+                        <a href="#" class="attorney-profile">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Attorney 3 -->
+                <div class="attorney-card">
+                    <div class="attorney-image">
+                        <img src="assets/attorneys/attorney3.jpg" alt="Michael Chen" loading="lazy">
+                        <div class="attorney-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="attorney-info">
+                        <h3>Michael Chen</h3>
+                        <p class="attorney-title">Partner</p>
+                        <p class="attorney-specialty">Corporate Law, Real Estate</p>
+                        <a href="#" class="attorney-profile">View Profile</a>
+                    </div>
+                </div>
+                
+                <!-- Attorney 4 -->
+                <div class="attorney-card">
+                    <div class="attorney-image">
+                        <img src="assets/attorneys/attorney4.jpg" alt="Amanda Rodriguez" loading="lazy">
+                        <div class="attorney-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="attorney-info">
+                        <h3>Amanda Rodriguez</h3>
+                        <p class="attorney-title">Associate</p>
+                        <p class="attorney-specialty">Personal Injury, Medical Malpractice</p>
+                        <a href="#" class="attorney-profile">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Client <span>Testimonials</span></h2>
+                <p class="section-description">Hear what our clients say about our services</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>Justice Law Firm handled my complex divorce case with professionalism and compassion. They fought hard to protect my rights and achieved a settlement far better than I expected.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/testimonials/client1.jpg" alt="Jennifer Martinez" loading="lazy">
+                            <div class="author-info">
+                                <h4>Jennifer Martinez</h4>
+                                <p>Family Law Client</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>When our business faced a serious lawsuit, Robert Johnson's expertise in litigation was invaluable. His strategic approach resulted in a complete dismissal of the case against us.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/testimonials/client2.jpg" alt="David Thompson" loading="lazy">
+                            <div class="author-info">
+                                <h4>David Thompson</h4>
+                                <p>Business Client</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>After my car accident, Amanda Rodriguez secured a settlement that covered all my medical expenses and then some. She was attentive, communicative, and truly cared about my recovery.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="assets/testimonials/client3.jpg" alt="James Wilson" loading="lazy">
+                            <div class="author-info">
+                                <h4>James Wilson</h4>
+                                <p>Personal Injury Client</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <button class="testimonial-prev" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonial-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="testimonial-next" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Results Section -->
+    <section class="case-results">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recent <span>Case Results</span></h2>
+                <p class="section-description">Examples of our successful case outcomes</p>
+            </div>
+            
+            <div class="results-grid">
+                <!-- Result 1 -->
+                <div class="result-card">
+                    <h3>$2.8 Million</h3>
+                    <p>Medical Malpractice Settlement</p>
+                    <div class="result-details">
+                        <i class="fas fa-plus"></i>
+                        <span>View Details</span>
+                    </div>
+                </div>
+                
+                <!-- Result 2 -->
+                <div class="result-card">
+                    <h3>Not Guilty</h3>
+                    <p>Felony Criminal Defense Verdict</p>
+                    <div class="result-details">
+                        <i class="fas fa-plus"></i>
+                        <span>View Details</span>
+                    </div>
+                </div>
+                
+                <!-- Result 3 -->
+                <div class="result-card">
+                    <h3>Full Custody</h3>
+                    <p>Child Custody Case Win</p>
+                    <div class="result-details">
+                        <i class="fas fa-plus"></i>
+                        <span>View Details</span>
+                    </div>
+                </div>
+                
+                <!-- Result 4 -->
+                <div class="result-card">
+                    <h3>$1.2 Million</h3>
+                    <p>Premises Liability Settlement</p>
+                    <div class="result-details">
+                        <i class="fas fa-plus"></i>
+                        <span>View Details</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <p>*Case results depend on a variety of factors unique to each case. Past results do not guarantee similar outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Legal <span>Insights</span></h2>
+                <p class="section-description">Recent articles and legal updates</p>
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Post 1 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/blog/post1.jpg" alt="Legal article image" loading="lazy">
+                        <div class="blog-date">
+                            <span>15</span>
+                            <span>Jun</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Changes to Divorce Laws in 2023</a></h3>
+                        <p class="blog-excerpt">Important updates to state divorce laws that may affect your case.</p>
+                        <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Post 2 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/blog/post2.jpg" alt="Legal article image" loading="lazy">
+                        <div class="blog-date">
+                            <span>02</span>
+                            <span>Jun</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Protecting Your Business from Lawsuits</a></h3>
+                        <p class="blog-excerpt">Essential legal strategies every business owner should implement.</p>
+                        <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Post 3 -->
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/blog/post3.jpg" alt="Legal article image" loading="lazy">
+                        <div class="blog-date">
+                            <span>24</span>
+                            <span>May</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">What to Do After a Car Accident</a></h3>
+                        <p class="blog-excerpt">Step-by-step guide to protect your rights and potential claim.</p>
+                        <a href="#" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="blog-cta">
+                <a href="#" class="btn btn-outline">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="section-title">Contact <span>Our Firm</span></h2>
+                    <p class="contact-description">Schedule a consultation with one of our attorneys today.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Office Location</h4>
+                                <p>123 Legal Avenue, Suite 500<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Call Us</h4>
+                                <p>+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Email Us</h4>
+                                <p>info@justicelaw.com<br>contact@justicelaw.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email Address</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone">
+                            <label for="phone">Phone Number</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="practice-area" name="practice-area">
+                                <option value="">Select Practice Area</option>
+                                <option value="criminal">Criminal Defense</option>
+                                <option value="family">Family Law</option>
+                                <option value="business">Business Law</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="personal-injury">Personal Injury</option>
+                                <option value="estate">Estate Planning</option>
+                            </select>
+                            <label for="practice-area">Practice Area</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="logo">
+                        <span>Justice</span> Law Firm
+                    </a>
+                    <p>Providing exceptional legal services with integrity, professionalism, and dedication to client success.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#practice-areas">Practice Areas</a></li>
+                        <li><a href="#attorneys">Attorneys</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-practice">
+                    <h3>Practice Areas</h3>
+                    <ul>
+                        <li><a href="#">Criminal Defense</a></li>
+                        <li><a href="#">Family Law</a></li>
+                        <li><a href="#">Business Law</a></li>
+                        <li><a href="#">Real Estate</a></li>
+                        <li><a href="#">Personal Injury</a></li>
+                        <li><a href="#">Estate Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for legal updates and firm news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Justice Law Firm. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Attorney Advertising</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js">document.addEventListener('DOMContentLoaded', function() {
+    // Preloader
+    const preloader = document.querySelector('.preloader');
+    window.addEventListener('load', function() {
+        preloader.style.display = 'none';
+    });
+
+    // Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMenu = document.querySelector('.close-menu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+
+    closeMenu.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+    });
+
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    // Sticky Header
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth Scrolling for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Active Link Highlighting
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    window.addEventListener('scroll', function() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Testimonial Slider
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialDots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.testimonial-prev');
+    const nextBtn = document.querySelector('.testimonial-next');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        testimonialSlides.forEach(slide => slide.classList.remove('active'));
+        testimonialDots.forEach(dot => dot.classList.remove('active'));
+        
+        testimonialSlides[index].classList.add('active');
+        testimonialDots[index].classList.add('active');
+        currentSlide = index;
+    }
+
+    testimonialDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + testimonialSlides.length) % testimonialSlides.length;
+        showSlide(currentSlide);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % testimonialSlides.length;
+        showSlide(currentSlide);
+    });
+
+    // Initialize first slide
+    showSlide(0);
+
+    // Auto-advance testimonials (optional)
+    // setInterval(() => {
+    //     currentSlide = (currentSlide + 1) % testimonialSlides.length;
+    //     showSlide(currentSlide);
+    // }, 5000);
+
+    // Back to Top Button
+    const backToTopBtn = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('active');
+        } else {
+            backToTopBtn.classList.remove('active');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Current Year in Footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Animate on Scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+    function checkScroll() {
+        animateElements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                element.classList.add('animated');
+            }
+        });
+    }
+
+    // Initial check
+    checkScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkScroll);
+});</script>
+</body>
+</html>

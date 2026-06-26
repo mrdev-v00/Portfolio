@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Digital Product</title>
+  <style>
+    /* === CSS RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* === VARIABLES === */
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --border: #dee2e6;
+      --success: #4bb543;
+    }
+
+    /* === BASE STYLES === */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7ff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* === CHECKOUT LAYOUT === */
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* === CHECKOUT STEPS === */
+    .checkout-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .checkout-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--border);
+      z-index: 1;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--border);
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .step.active .step-number {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .step.completed .step-number {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .step-title {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .step.active .step-title {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .step.completed .step-title {
+      color: var(--success);
+    }
+
+    /* === CHECKOUT FORM === */
+    .checkout-form {
+      background-color: white;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* === PAYMENT METHODS === */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .payment-method:hover {
+      border-color: var(--primary);
+    }
+
+    .payment-method.active {
+      border-color: var(--primary);
+      background-color: rgba(67, 97, 238, 0.05);
+    }
+
+    .payment-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* === ORDER SUMMARY === */
+    .order-summary {
+      background-color: white;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      align-self: flex-start;
+      position: sticky;
+      top: 20px;
+    }
+
+    .product-card {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-type {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-total {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* === COUPON === */
+    .coupon-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .coupon-input {
+      flex: 1;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border);
+      color: var(--dark);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--light);
+    }
+
+    /* === SECURITY BADGES === */
+    .security-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      height: 40px;
+      opacity: 0.8;
+    }
+
+    /* === FOOTER === */
+    .checkout-footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .checkout-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 576px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+      
+      .payment-methods {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Checkout Steps -->
+    <div class="checkout-steps">
+      <div class="step completed">
+        <div class="step-number">1</div>
+        <div class="step-title">Information</div>
+      </div>
+      <div class="step active">
+        <div class="step-number">2</div>
+        <div class="step-title">Payment</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">Confirmation</div>
+      </div>
+    </div>
+
+    <div class="checkout-container">
+      <!-- Checkout Form -->
+      <div class="checkout-form">
+        <h2 class="section-title">Payment Details</h2>
+        
+        <div class="form-group">
+          <label for="card-name">Name on Card</label>
+          <input type="text" id="card-name" class="form-control" placeholder="John Smith">
+        </div>
+        
+        <div class="form-group">
+          <label for="card-number">Card Number</label>
+          <input type="text" id="card-number" class="form-control" placeholder="4242 4242 4242 4242">
+        </div>
+        
+        <div class="row">
+          <div class="form-group">
+            <label for="card-expiry">Expiration Date</label>
+            <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY">
+          </div>
+          <div class="form-group">
+            <label for="card-cvc">Security Code</label>
+            <input type="text" id="card-cvc" class="form-control" placeholder="CVC">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div class="payment-methods">
+            <div class="payment-method active">
+              <div class="payment-icon">💳</div>
+              <div>Credit Card</div>
+            </div>
+            <div class="payment-method">
+              <div class="payment-icon">📱</div>
+              <div>PayPal</div>
+            </div>
+            <div class="payment-method">
+              <div class="payment-icon">⎈</div>
+              <div>Crypto</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="your@email.com">
+          <small class="text-muted">Receipt will be sent to this address</small>
+        </div>
+        
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" id="save-card" class="form-check-input">
+            <label for="save-card">Save card for future purchases</label>
+          </div>
+        </div>
+        
+        <button class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+          Complete Purchase
+        </button>
+        
+        <div class="security-badges">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png" alt="Mastercard" class="badge" style="height: 30px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="badge" style="height: 20px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Apple_Pay_logo.svg/1024px-Apple_Pay_logo.svg.png" alt="Apple Pay" class="badge">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Google_Pay_Logo.svg/1024px-Google_Pay_Logo.svg.png" alt="Google Pay" class="badge">
+        </div>
+      </div>
+      
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2 class="section-title">Order Summary</h2>
+        
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Product" class="product-image">
+          <div class="product-info">
+            <h3 class="product-title">UX Design Masterclass</h3>
+            <div class="product-type">Online Course</div>
+            <div class="product-price">$97.00</div>
+          </div>
+        </div>
+        
+        <div class="coupon-group">
+          <input type="text" class="form-control coupon-input" placeholder="Coupon Code">
+          <button class="btn-outline">Apply</button>
+        </div>
+        
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>$97.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Discount:</span>
+          <span style="color: var(--success)">-$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax:</span>
+          <span>$0.00</span>
+        </div>
+        
+        <div class="summary-row summary-total">
+          <span>Total:</span>
+          <span>$97.00</span>
+        </div>
+        
+        <div style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gray);">
+          <p>This is a digital product. You'll receive instant access after purchase.</p>
+          <p style="margin-top: 0.5rem;">All sales are final. 30-day money-back guarantee.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="checkout-footer">
+      <p>© 2023 Digital Products Inc. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </div>
+
+  <script>
+    // === JAVASCRIPT ===
+    document.addEventListener('DOMContentLoaded', function() {
+      // Payment method selection
+      const paymentMethods = document.querySelectorAll('.payment-method');
+      
+      paymentMethods.forEach(method => {
+        method.addEventListener('click', function() {
+          paymentMethods.forEach(m => m.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Credit card input formatting
+      const cardNumber = document.getElementById('card-number');
+      const cardExpiry = document.getElementById('card-expiry');
+      const cardCvc = document.getElementById('card-cvc');
+      
+      cardNumber.addEventListener('input', function(e) {
+        let value = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let formatted = '';
+        
+        for (let i = 0; i < value.length; i++) {
+          if (i > 0 && i % 4 === 0) {
+            formatted += ' ';
+          }
+          formatted += value[i];
+        }
+        
+        this.value = formatted.substring(0, 19);
+      });
+      
+      cardExpiry.addEventListener('input', function(e) {
+        let value = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        
+        if (value.length > 2) {
+          value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        
+        this.value = value.substring(0, 5);
+      });
+      
+      cardCvc.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/gi, '').substring(0, 4);
+      });
+      
+      // Form submission
+      const form = document.querySelector('.checkout-form');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Payment processed successfully!');
+        // In a real app, you would handle payment processing here
+      });
+    });
+  </script>
+</body>
+</html>

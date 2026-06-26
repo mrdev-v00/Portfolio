@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Forgotten Expedition | Interactive Story</title>
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Light Theme */
+            --bg-color: #f5f5f5;
+            --text-color: #222;
+            --accent-color: #3a5a78;
+            --card-bg: #ffffff;
+            --border-color: #ddd;
+            --button-bg: #3a5a78;
+            --button-hover: #2c4461;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #6d8cb0;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --button-bg: #6d8cb0;
+            --button-hover: #5a7696;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* === Header === */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* === Story Container === */
+        .story-container {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .story-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .story-subtitle {
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .story-content {
+            margin-bottom: 2rem;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        /* === Choices === */
+        .choices {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .choice-btn {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .choice-btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        /* === Inventory/Stats === */
+        .stats-panel {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-icon {
+            font-size: 1.2rem;
+        }
+
+        /* === History === */
+        .history-panel {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .history-item {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            border-left: 2px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        /* === Footer === */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .story-container {
+                padding: 1.5rem;
+            }
+            
+            .story-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="#" class="logo">The Forgotten Expedition</a>
+            <button class="theme-toggle">🌓</button>
+        </header>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-item">
+                <span class="stat-icon">🧭</span>
+                <span>Chapter: <span id="chapterCounter">1</span></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">❤️</span>
+                <span>Health: <span id="healthStat">100%</span></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🎒</span>
+                <span>Items: <span id="inventoryStat">0</span></span>
+            </div>
+        </div>
+
+        <!-- Story Container -->
+        <div class="story-container" id="storyContainer">
+            <h1 class="story-title">The Forgotten Expedition</h1>
+            <p class="story-subtitle">Your choices shape the adventure</p>
+            
+            <div class="story-content" id="storyContent">
+                <p>The jungle air hangs thick with humidity as you push through the dense foliage. Your team was supposed to meet you at the rendezvous point three hours ago, but all you found was an abandoned campsite and a single notebook with cryptic coordinates.</p>
+                
+                <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jungle" class="story-image">
+                
+                <p>As night falls, you notice flickering lights in the distance. Through your binoculars, you can make out what appears to be either:</p>
+            </div>
+            
+            <div class="choices" id="choicesContainer">
+                <button class="choice-btn" data-next="camp">A research camp with several tents and equipment</button>
+                <button class="choice-btn" data-next="village">A small indigenous village with torchlights</button>
+                <button class="choice-btn" data-next="alone">Nothing - you decide to stay put and wait for daylight</button>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel">
+            <h3 class="history-title">Your Journey</h3>
+            <div id="historyLog">
+                <div class="history-item">Started your expedition in the Amazon rainforest</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Interactive Story Blog. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Story Data
+        const storyPaths = {
+            start: {
+                content: `
+                    <p>The jungle air hangs thick with humidity as you push through the dense foliage. Your team was supposed to meet you at the rendezvous point three hours ago, but all you found was an abandoned campsite and a single notebook with cryptic coordinates.</p>
+                    
+                    <img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jungle" class="story-image">
+                    
+                    <p>As night falls, you notice flickering lights in the distance. Through your binoculars, you can make out what appears to be either:</p>
+                `,
+                choices: [
+                    { text: "A research camp with several tents and equipment", next: "camp" },
+                    { text: "A small indigenous village with torchlights", next: "village" },
+                    { text: "Nothing - you decide to stay put and wait for daylight", next: "alone" }
+                ]
+            },
+            camp: {
+                content: `
+                    <p>You approach the research camp cautiously. The tents appear abandoned, but equipment is neatly organized as if the researchers just stepped away. A laptop on a folding table shows a live feed from what looks like an underground cavern system.</p>
+                    
+                    <img src="https://images.unsplash.com/photo-1582731594630-82d19a23fea7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Research Camp" class="story-image">
+                    
+                    <p>Suddenly, you hear rustling from the largest tent. You grab a nearby flashlight and:</p>
+                `,
+                choices: [
+                    { text: "Call out to announce your presence", next: "callOut" },
+                    { text: "Approach silently to investigate", next: "sneak" },
+                    { text: "Quickly leave the camp and head toward the coordinates", next: "leaveCamp" }
+                ],
+                healthChange: 0,
+                inventoryChange: 1
+            },
+            village: {
+                content: `
+                    <p>As you near the village, you're greeted by tribespeople who don't speak your language but seem to recognize your expedition logo. They lead you to their elder, who shows you ancient carvings that match symbols from your notebook.</p>
+                    
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Village" class="story-image">
+                    
+                    <p>The elder offers to help you, but warns of danger ahead. You:</p>
+                `,
+                choices: [
+                    { text: "Accept their help and a guide", next: "guide" },
+                    { text: "Politely decline but study the carvings carefully", next: "study" },
+                    { text: "Ask about your missing team", next: "askTeam" }
+                ],
+                healthChange: 10,
+                inventoryChange: 0
+            },
+            alone: {
+                content: `
+                    <p>You decide to make camp and wait for daylight. As you set up your tent, you hear strange animal calls unlike anything in your field guides. In the morning, you discover fresh footprints around your campsite that weren't there before.</p>
+                    
+                    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Campsite" class="story-image">
+                    
+                    <p>The footprints lead in two directions:</p>
+                `,
+                choices: [
+                    { text: "Follow them toward the river", next: "river" },
+                    { text: "Follow them deeper into the jungle", next: "deepJungle" },
+                    { text: "Ignore them and head to the coordinates", next: "coordinates" }
+                ],
+                healthChange: -5,
+                inventoryChange: 0
+            }
+            // Additional story paths would continue here...
+        };
+
+        // Game State
+        let gameState = {
+            currentPath: 'start',
+            chapter: 1,
+            health: 100,
+            inventory: 0,
+            history: ['Started your expedition in the Amazon rainforest']
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const storyContent = document.getElementById('storyContent');
+            const choicesContainer = document.getElementById('choicesContainer');
+            const chapterCounter = document.getElementById('chapterCounter');
+            const healthStat = document.getElementById('healthStat');
+            const inventoryStat = document.getElementById('inventoryStat');
+            const historyLog = document.getElementById('historyLog');
+            
+            // Theme Toggle
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌓';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '🌞';
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '🌞';
+            }
+            
+            // Render current story segment
+            function renderStory() {
+                const segment = storyPaths[gameState.currentPath];
+                
+                storyContent.innerHTML = segment.content;
+                choicesContainer.innerHTML = '';
+                
+                // Update stats
+                chapterCounter.textContent = gameState.chapter;
+                healthStat.textContent = `${gameState.health}%`;
+                inventoryStat.textContent = gameState.inventory;
+                
+                // Create choice buttons
+                segment.choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-btn';
+                    button.textContent = choice.text;
+                    button.dataset.next = choice.next;
+                    button.addEventListener('click', makeChoice);
+                    choicesContainer.appendChild(button);
+                });
+                
+                // Update health and inventory
+                if (segment.healthChange) {
+                    gameState.health = Math.min(100, gameState.health + segment.healthChange);
+                    healthStat.textContent = `${gameState.health}%`;
+                }
+                
+                if (segment.inventoryChange) {
+                    gameState.inventory += segment.inventoryChange;
+                    inventoryStat.textContent = gameState.inventory;
+                }
+            }
+            
+            // Handle player choices
+            function makeChoice(e) {
+                const nextSegment = e.target.dataset.next;
+                gameState.currentPath = nextSegment;
+                gameState.chapter++;
+                
+                // Add to history
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.textContent = e.target.textContent;
+                historyLog.appendChild(historyItem);
+                historyLog.scrollTop = historyLog.scrollHeight;
+                
+                gameState.history.push(e.target.textContent);
+                renderStory();
+            }
+            
+            // Initialize
+            renderStory();
+        });
+    </script>
+</body>
+</html>

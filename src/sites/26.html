@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsWave | Modern Magazine</title>
+    <style>
+        /* ===== Base Styles & Variables ===== */
+        :root {
+            /* Light Theme */
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #d63384;
+            --secondary-color: #e9ecef;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --secondary-color: #1e1e1e;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* ===== Layout ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== Header ===== */
+        header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-article {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-article img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+        }
+
+        .featured-content h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-content p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .secondary-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .secondary-article {
+            display: flex;
+            gap: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .secondary-article img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .secondary-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== Category Sections ===== */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .view-all {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 1.2rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--secondary-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Dark Mode Toggle ===== */
+        .theme-toggle {
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--secondary-color);
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .secondary-article {
+                flex-direction: column;
+            }
+
+            .secondary-article img {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <a href="#" class="logo">NewsWave</a>
+                <nav class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Politics</a>
+                    <a href="#">Technology</a>
+                    <a href="#">Business</a>
+                    <a href="#">Science</a>
+                    <a href="#">Health</a>
+                </nav>
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <span>🌓</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="featured-article">
+                <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Featured News">
+                <div class="featured-content">
+                    <span class="tag">Breaking</span>
+                    <h2>Global Summit Addresses Climate Change Crisis</h2>
+                    <p>World leaders gather to discuss urgent measures against rising global temperatures.</p>
+                    <a href="#" style="color: white; font-weight: 500;">Read Full Story →</a>
+                </div>
+            </div>
+            <div class="secondary-articles">
+                <div class="secondary-article">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tech News">
+                    <div class="secondary-content">
+                        <h3>New AI Model Outperforms Humans in Creative Tasks</h3>
+                        <p>Researchers stunned by unexpected capabilities</p>
+                    </div>
+                </div>
+                <div class="secondary-article">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Business News">
+                    <div class="secondary-content">
+                        <h3>Major Merger Creates New Tech Giant</h3>
+                        <p>Deal valued at $120 billion</p>
+                    </div>
+                </div>
+                <div class="secondary-article">
+                    <img src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Health News">
+                    <div class="secondary-content">
+                        <h3>Breakthrough in Cancer Treatment Shows Promise</h3>
+                        <p>Early trials show 80% success rate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Politics Section -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Politics</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1567791124560-f1df0b822b03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Political News">
+                    <div class="article-content">
+                        <h3>Senate Passes Controversial Reform Bill</h3>
+                        <p>The legislation passed by narrow margin after marathon session</p>
+                        <div class="article-meta">
+                            <span>By Jane Smith</span>
+                            <span>2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Political News">
+                    <div class="article-content">
+                        <h3>Diplomatic Tensions Rise Between Major Powers</h3>
+                        <p>Ambassadors recalled as trade dispute escalates</p>
+                        <div class="article-meta">
+                            <span>By Robert Chen</span>
+                            <span>5 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Political News">
+                    <div class="article-content">
+                        <h3>Local Elections Show Surprising Results</h3>
+                        <p>Independent candidates gain ground in traditionally partisan districts</p>
+                        <div class="article-meta">
+                            <span>By Maria Gonzalez</span>
+                            <span>Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="category-section">
+            <div class="section-header">
+                <h2 class="section-title">Technology</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tech News">
+                    <div class="article-content">
+                        <h3>New Smartphone Breaks Performance Records</h3>
+                        <p>Benchmark tests show 40% improvement over previous generation</p>
+                        <div class="article-meta">
+                            <span>By Alex Johnson</span>
+                            <span>3 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tech News">
+                    <div class="article-content">
+                        <h3>Major Security Flaw Discovered in Popular Apps</h3>
+                        <p>Update your devices immediately, experts warn</p>
+                        <div class="article-meta">
+                            <span>By Sarah Miller</span>
+                            <span>8 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tech News">
+                    <div class="article-content">
+                        <h3>VR Headset Sales Surge as Prices Drop</h3>
+                        <p>Consumer adoption reaches critical mass</p>
+                        <div class="article-meta">
+                            <span>By David Kim</span>
+                            <span>Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Careers</a>
+                <a href="#">Advertise</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <p class="copyright">© 2023 NewsWave. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+            // Apply saved theme
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<span>🌞</span>';
+            }
+
+            // Toggle theme
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '<span>🌓</span>';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '<span>🌞</span>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

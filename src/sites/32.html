@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Blog</title>
+    <style>
+        /* === Base Styles & Variables === */
+        :root {
+            /* Light Theme */
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #4361ee;
+            --sidebar-bg: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e9ecef;
+            --accent-color: #5a72e6;
+            --sidebar-bg: #1e1e1e;
+            --card-bg: #1a1a1a;
+            --border-color: #333;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* === Layout === */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* === Sidebar === */
+        .sidebar {
+            position: sticky;
+            top: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-content {
+            background: var(--sidebar-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: block;
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        .sidebar-nav {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--border-color);
+            color: var(--accent-color);
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--border-color);
+            color: var(--accent-color);
+        }
+
+        .filter-btn i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* === Main Content === */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--sidebar-bg);
+            color: var(--text-color);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* === Blog Posts === */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            background-color: var(--border-color);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* === Footer === */
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* === Icons (using Unicode as fallback) === */
+        .icon-home::before { content: "🏠"; }
+        .icon-articles::before { content: "📝"; }
+        .icon-categories::before { content: "🗂️"; }
+        .icon-about::before { content: "ℹ️"; }
+        .icon-search::before { content: "🔍"; }
+        .icon-theme::before { content: "🌓"; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <a href="#" class="logo">Sidebar</a>
+                
+                <button class="theme-toggle">
+                    <span class="icon-theme"></span>
+                    <span>Dark Mode</span>
+                </button>
+                
+                <nav class="sidebar-nav">
+                    <h3 class="sidebar-title">Navigation</h3>
+                    <div class="nav-links">
+                        <a href="#" class="nav-link active">
+                            <span class="icon-home"></span>
+                            <span>Home</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <span class="icon-articles"></span>
+                            <span>Articles</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <span class="icon-categories"></span>
+                            <span>Categories</span>
+                        </a>
+                        <a href="#" class="nav-link">
+                            <span class="icon-about"></span>
+                            <span>About</span>
+                        </a>
+                    </div>
+                </nav>
+                
+                <div class="sidebar-nav">
+                    <h3 class="sidebar-title">Categories</h3>
+                    <div class="category-filters">
+                        <button class="filter-btn active">
+                            <span class="icon-home"></span>
+                            <span>All Posts</span>
+                        </button>
+                        <button class="filter-btn">
+                            <span class="icon-articles"></span>
+                            <span>Technology</span>
+                        </button>
+                        <button class="filter-btn">
+                            <span class="icon-categories"></span>
+                            <span>Design</span>
+                        </button>
+                        <button class="filter-btn">
+                            <span class="icon-about"></span>
+                            <span>Business</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="search-box">
+                <span class="icon-search"></span>
+                <input type="text" placeholder="Search articles...">
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Blog Card 1 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Web Development" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">React 19: What's Coming Next?</h3>
+                        <p class="card-excerpt">A deep dive into the upcoming features of React 19 and how they'll change frontend development.</p>
+                        <div class="card-meta">
+                            <span>June 10, 2023</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Design" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Design</span>
+                        <h3 class="card-title">Minimalism in UI Design</h3>
+                        <p class="card-excerpt">How stripping back to essentials can create more powerful user interfaces and better experiences.</p>
+                        <div class="card-meta">
+                            <span>June 5, 2023</span>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Business" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Business</span>
+                        <h3 class="card-title">Remote Work in 2023</h3>
+                        <p class="card-excerpt">The latest trends in distributed teams and how companies are adapting their workflows.</p>
+                        <div class="card-meta">
+                            <span>May 28, 2023</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Animation" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Design</span>
+                        <h3 class="card-title">Creating Smooth UI Transitions</h3>
+                        <p class="card-excerpt">Learn how to implement buttery-smooth animations that enhance user experience without being distracting.</p>
+                        <div class="card-meta">
+                            <span>May 20, 2023</span>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 5 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Design" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">The Psychology of Color in Web Design</h3>
+                        <p class="card-excerpt">How color choices affect user behavior and what you should consider for your next project.</p>
+                        <div class="card-meta">
+                            <span>May 15, 2023</span>
+                            <span>9 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 6 -->
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Business" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Business</span>
+                        <h3 class="card-title">Startup Funding Strategies</h3>
+                        <p class="card-excerpt">Exploring alternative funding options beyond traditional venture capital in today's market.</p>
+                        <div class="card-meta">
+                            <span>May 10, 2023</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <footer>
+                <p>© 2023 Sidebar Blog. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Theme Toggle
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '<span class="icon-theme"></span><span>Dark Mode</span>';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '<span class="icon-theme"></span><span>Light Mode</span>';
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<span class="icon-theme"></span><span>Light Mode</span>';
+            }
+            
+            // Filter Buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you would filter content here
+                });
+            });
+            
+            // Nav Links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(lnk => lnk.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you would navigate to different sections
+                });
+            });
+        });
+    </script>
+</body>
+</html>

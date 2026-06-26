@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Haven - Modern Bookstore</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --radius: 8px;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Filter Section */
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background: var(--light);
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover {
+            background: #eee;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+        }
+
+        /* Book Grid */
+        .books {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .book-info {
+            padding: 20px;
+        }
+
+        .book-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-author {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .book-genre {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .book-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .book-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: #5a4bd6;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            grid-column: 1 / -1;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .books {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 20px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .books {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Book Haven</div>
+        <div class="tagline">Discover your next favorite read</div>
+    </header>
+
+    <div class="filters">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search by title or author...">
+        </div>
+        
+        <div class="filter-group">
+            <h3>Genre</h3>
+            <div class="filter-options" id="genre-filters">
+                <button class="filter-btn" data-genre="all">All</button>
+                <button class="filter-btn" data-genre="fiction">Fiction</button>
+                <button class="filter-btn" data-genre="mystery">Mystery</button>
+                <button class="filter-btn" data-genre="scifi">Sci-Fi</button>
+                <button class="filter-btn" data-genre="fantasy">Fantasy</button>
+                <button class="filter-btn" data-genre="romance">Romance</button>
+            </div>
+        </div>
+        
+        <div class="filter-group">
+            <h3>Price Range</h3>
+            <div class="filter-options" id="price-filters">
+                <button class="filter-btn" data-price="all">All</button>
+                <button class="filter-btn" data-price="0-15">Under $15</button>
+                <button class="filter-btn" data-price="15-30">$15 - $30</button>
+                <button class="filter-btn" data-price="30+">Over $30</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="books" id="book-container">
+        <!-- Books will be dynamically inserted here -->
+    </div>
+
+    <footer>
+        <p>© 2023 Book Haven. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Book Data
+        const books = [
+            {
+                id: 1,
+                title: "The Silent Patient",
+                author: "Alex Michaelides",
+                genre: "mystery",
+                price: 12.99,
+                image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: true
+            },
+            {
+                id: 2,
+                title: "Dune",
+                author: "Frank Herbert",
+                genre: "scifi",
+                price: 14.95,
+                image: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: false
+            },
+            {
+                id: 3,
+                title: "The Midnight Library",
+                author: "Matt Haig",
+                genre: "fiction",
+                price: 18.50,
+                image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: true
+            },
+            {
+                id: 4,
+                title: "Project Hail Mary",
+                author: "Andy Weir",
+                genre: "scifi",
+                price: 24.99,
+                image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: false
+            },
+            {
+                id: 5,
+                title: "The House in the Cerulean Sea",
+                author: "TJ Klune",
+                genre: "fantasy",
+                price: 16.99,
+                image: "https://images.unsplash.com/photo-1626618012641-bfbca5a31239?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: false
+            },
+            {
+                id: 6,
+                title: "Normal People",
+                author: "Sally Rooney",
+                genre: "romance",
+                price: 13.25,
+                image: "https://images.unsplash.com/photo-1592496431122-2349e0fbc666?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: false
+            },
+            {
+                id: 7,
+                title: "The Name of the Wind",
+                author: "Patrick Rothfuss",
+                genre: "fantasy",
+                price: 19.99,
+                image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: true
+            },
+            {
+                id: 8,
+                title: "Where the Crawdads Sing",
+                author: "Delia Owens",
+                genre: "fiction",
+                price: 15.75,
+                image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                featured: false
+            }
+        ];
+
+        // DOM Elements
+        const bookContainer = document.getElementById('book-container');
+        const genreFilters = document.getElementById('genre-filters');
+        const priceFilters = document.getElementById('price-filters');
+        const searchInput = document.getElementById('search');
+        
+        // Current filters
+        let currentGenre = 'all';
+        let currentPrice = 'all';
+        let currentSearch = '';
+
+        // Initialize the page
+        function init() {
+            renderBooks(books);
+            setupEventListeners();
+        }
+
+        // Render books to the page
+        function renderBooks(booksToRender) {
+            bookContainer.innerHTML = '';
+            
+            if (booksToRender.length === 0) {
+                bookContainer.innerHTML = '<div class="no-results">No books match your filters. Try adjusting your search.</div>';
+                return;
+            }
+            
+            booksToRender.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                
+                bookCard.innerHTML = `
+                    ${book.featured ? '<div class="book-badge">Featured</div>' : ''}
+                    <img src="${book.image}" alt="${book.title}" class="book-image">
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">By ${book.author}</p>
+                        <span class="book-genre">${formatGenre(book.genre)}</span>
+                        <div class="book-footer">
+                            <div class="book-price">$${book.price.toFixed(2)}</div>
+                            <button class="add-to-cart" data-id="${book.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                
+                bookContainer.appendChild(bookCard);
+            });
+        }
+
+        // Format genre for display
+        function formatGenre(genre) {
+            const genreMap = {
+                'fiction': 'Fiction',
+                'mystery': 'Mystery',
+                'scifi': 'Science Fiction',
+                'fantasy': 'Fantasy',
+                'romance': 'Romance'
+            };
+            return genreMap[genre] || genre;
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Genre filter buttons
+            genreFilters.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    genreFilters.querySelector('.active')?.classList.remove('active');
+                    this.classList.add('active');
+                    currentGenre = this.dataset.genre;
+                    filterBooks();
+                });
+            });
+            
+            // Price filter buttons
+            priceFilters.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    priceFilters.querySelector('.active')?.classList.remove('active');
+                    this.classList.add('active');
+                    currentPrice = this.dataset.price;
+                    filterBooks();
+                });
+            });
+            
+            // Search input
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value.toLowerCase();
+                filterBooks();
+            });
+            
+            // Set initial active filters
+            genreFilters.querySelector('[data-genre="all"]').classList.add('active');
+            priceFilters.querySelector('[data-price="all"]').classList.add('active');
+        }
+
+        // Filter books based on current filters
+        function filterBooks() {
+            let filteredBooks = [...books];
+            
+            // Apply genre filter
+            if (currentGenre !== 'all') {
+                filteredBooks = filteredBooks.filter(book => book.genre === currentGenre);
+            }
+            
+            // Apply price filter
+            if (currentPrice !== 'all') {
+                if (currentPrice === '0-15') {
+                    filteredBooks = filteredBooks.filter(book => book.price < 15);
+                } else if (currentPrice === '15-30') {
+                    filteredBooks = filteredBooks.filter(book => book.price >= 15 && book.price <= 30);
+                } else if (currentPrice === '30+') {
+                    filteredBooks = filteredBooks.filter(book => book.price > 30);
+                }
+            }
+            
+            // Apply search filter
+            if (currentSearch) {
+                filteredBooks = filteredBooks.filter(book => 
+                    book.title.toLowerCase().includes(currentSearch) || 
+                    book.author.toLowerCase().includes(currentSearch)
+                );
+            }
+            
+            renderBooks(filteredBooks);
+        }
+
+        // Initialize the page
+        init();
+    </script>
+</body>
+</html>

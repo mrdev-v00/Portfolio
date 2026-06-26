@@ -1,0 +1,449 @@
+{
+  "projects": [
+    {
+      "id": "flawless",
+      "title": "Flawless",
+      "category": "Discord Bot",
+      "description": "Multi‑purpose bot with 60+ features — moderation, fun, utility, and more.",
+      "longDescription": "Flawless is a powerful and modular Discord bot designed for servers of all sizes. It includes a full moderation suite, fun interactions, leveling system, economy, and custom commands. The bot is highly configurable and actively maintained.",
+      "tech": ["Python", "discord.py", "MongoDB"],
+      "links": { "GitHub": "https://github.com/mrdev-v00/flawless" },
+      "featured": true
+    },
+    {
+      "id": "sweetchat",
+      "title": "Sweetchat",
+      "category": "Discord Bot",
+      "description": "AI chat bot using natural language understanding for engaging conversations.",
+      "longDescription": "Sweetchat leverages OpenAI's GPT models to provide intelligent, context‑aware conversations. It can answer questions, generate creative text, and assist with coding problems.",
+      "tech": ["Python", "OpenAI API", "discord.py"],
+      "links": {},
+      "featured": true
+    },
+    {
+      "id": "sweetvibe",
+      "title": "SweetVibe",
+      "category": "Discord Bot",
+      "description": "High‑quality music bot with queue management and low‑latency streaming.",
+      "longDescription": "SweetVibe delivers crystal‑clear audio from YouTube, Spotify, and SoundCloud. It supports playlists, volume control, and 24/7 playback in voice channels.",
+      "tech": ["Python", "Lavalink", "discord.py"],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "shadow-music",
+      "title": "Shadow Music",
+      "category": "Discord Bot",
+      "description": "Robust music bot focused on reliability and minimal latency for large communities.",
+      "longDescription": "Shadow Music is engineered for performance, handling hundreds of concurrent streams with ease. It includes advanced features like song requests, lyrics display, and custom playlists.",
+      "tech": ["Python", "Lavalink", "discord.py"],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "trendra",
+      "title": "TRENDRA AI",
+      "category": "AI Assistant",
+      "description": "Trading assistant that analyses market trends and provides signals.",
+      "longDescription": "TRENDRA uses machine learning to identify patterns in financial data. It offers real‑time alerts, risk analysis, and automated trading suggestions for both crypto and stocks.",
+      "tech": ["Python", "Pandas", "Scikit‑learn", "WebSocket"],
+      "links": {},
+      "featured": true
+    },
+    {
+      "id": "elysian",
+      "title": "ElySian AI",
+      "category": "AI Chatbot",
+      "description": "Unrestricted chat bot with advanced reasoning and creative writing.",
+      "longDescription": "ElySian is a fully open‑domain conversational AI that can engage in deep philosophical discussions, generate poetry, and assist with complex problem‑solving without content restrictions.",
+      "tech": ["Python", "LLM", "LangChain"],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "hijaz-traders",
+      "title": "Hijaz Traders",
+      "category": "Web Development",
+      "description": "Real‑client business website – responsive storefront with product catalog.",
+      "longDescription": "A fully responsive e‑commerce site for a local trading company. Includes product listings, detailed product pages, a contact form, and a clean, professional design that matches the brand identity.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "https://mrdev-v00.github.io/hijaz-traders/home.html" },
+      "featured": true
+    },
+    {
+      "id": "flawless-help",
+      "title": "Flawless Help",
+      "category": "Web Development",
+      "description": "Support hub for the Flawless bot – documentation, guides, and status.",
+      "longDescription": "A documentation site built to help users set up and use the Flawless bot. Includes setup guides, command lists, and a live status page.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "https://mrdev-v00.github.io/flawless-help/" },
+      "featured": false
+    },
+    {
+      "id": "wekeepciphers",
+      "title": "WeKeepCiphers",
+      "category": "Web Development",
+      "description": "Encryption & cipher tools – standalone and translation interfaces.",
+      "longDescription": "A collection of web‑based encryption and decryption tools, including Caesar cipher, Vigenère, and a custom translation interface for secure messaging.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": {
+        "Standalone": "https://mrdev-v00.github.io/WeKeepCiphersv2/standalone.html",
+        "Translate": "https://mrdev-v00.github.io/WeKeepCiphers/DarkWolves-Translates.html"
+      },
+      "featured": false
+    },
+    {
+      "id": "chrome-extension",
+      "title": "Chrome Extension",
+      "category": "Browser Extension",
+      "description": "Productivity extension built to enhance browsing workflow.",
+      "longDescription": "A custom Chrome extension that adds new shortcuts, quick notes, and a focus mode. It's designed to boost efficiency and reduce clutter while browsing. Download and view the extension files directly.",
+      "tech": ["JavaScript", "Chrome API"],
+      "links": {
+        "View / Download": "https://drive.google.com/file/d/1MoUJBx0D9xwHLdG9_gWzpJ0Tk_h92Q5h/view?usp=sharing"
+      },
+      "featured": false
+    },
+    {
+      "id": "client-site-2",
+      "title": "Client Site (Coming Soon)",
+      "category": "Web Development",
+      "description": "Another real‑client project – details to be announced.",
+      "longDescription": "A second client website currently in development. More information will be added upon completion.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": {},
+      "featured": false
+    },
+    {
+      "id": "site-13",
+      "title": "KicksHub – Premium Sneakers",
+      "category": "Static Sites",
+      "description": "E‑commerce store for sneakers with theme toggle and shopping cart.",
+      "longDescription": "A fully functional sneaker store with dark/light theme, product carousel, and a mini cart that persists with localStorage.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/13.html" },
+      "featured": false
+    },
+    {
+      "id": "site-14",
+      "title": "LUME – Minimalist Jewelry",
+      "category": "Static Sites",
+      "description": "Elegant jewelry store with a minimalist design and shopping cart.",
+      "longDescription": "A jewelry e‑commerce page with a clean aesthetic, product grid, and cart functionality.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/14.html" },
+      "featured": false
+    },
+    {
+      "id": "site-15",
+      "title": "FreshMart – Grocery Store",
+      "category": "Static Sites",
+      "description": "Online grocery store with categories, product filtering, and cart.",
+      "longDescription": "A grocery store interface with category browsing, product search, and a detailed cart with quantity controls.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/15.html" },
+      "featured": false
+    },
+    {
+      "id": "site-16",
+      "title": "Digital Product Checkout",
+      "category": "Static Sites",
+      "description": "A checkout page for digital products with payment form.",
+      "longDescription": "A clean checkout page with step indicators, payment method selection, and card input formatting.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/16.html" },
+      "featured": false
+    },
+    {
+      "id": "site-17",
+      "title": "Cart & Checkout",
+      "category": "Static Sites",
+      "description": "Complete shopping cart with summary and modal checkout.",
+      "longDescription": "A full cart page with product listing, quantity controls, order summary, and a modal for payment.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/17.html" },
+      "featured": false
+    },
+    {
+      "id": "site-18",
+      "title": "Choose Your Plan",
+      "category": "Static Sites",
+      "description": "Pricing page with toggle between monthly/annual plans.",
+      "longDescription": "A pricing page with three plans, a billing toggle, feature comparison table, and FAQ accordion.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/18.html" },
+      "featured": false
+    },
+    {
+      "id": "site-19",
+      "title": "Product Comparison",
+      "category": "Static Sites",
+      "description": "Interactive product comparison slider and feature table.",
+      "longDescription": "A comparison tool with a draggable slider, product cards, and a detailed feature table.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/19.html" },
+      "featured": false
+    },
+    {
+      "id": "site-20",
+      "title": "Nexus – Dark Mode E‑Commerce",
+      "category": "Static Sites",
+      "description": "Modern e‑commerce site with dark/light theme and product browsing.",
+      "longDescription": "An online store with category filtering, product cards, and a dark mode toggle that respects user preference.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/20.html" },
+      "featured": false
+    },
+    {
+      "id": "site-21",
+      "title": "Modern Add‑to‑Cart Animation",
+      "category": "Static Sites",
+      "description": "Product cards with flying cart animation and notification.",
+      "longDescription": "A demonstration of a smooth add‑to‑cart animation with a flying item and a toast notification.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/21.html" },
+      "featured": false
+    },
+    {
+      "id": "site-22",
+      "title": "Chapter & Verse – Bookstore (v1)",
+      "category": "Static Sites",
+      "description": "Bookstore with genre, price, and format filtering.",
+      "longDescription": "A book store with advanced filtering by genre, price range, and format. Books are dynamically rendered from a data array.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/22.html" },
+      "featured": false
+    },
+    {
+      "id": "site-23",
+      "title": "Chapter & Verse – Bookstore (v2)",
+      "category": "Static Sites",
+      "description": "Bookstore with filtering and search (alternative layout).",
+      "longDescription": "A second version of the bookstore with a slightly different design and filtering options.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/23.html" },
+      "featured": false
+    },
+    {
+      "id": "site-24",
+      "title": "Book Haven – Modern Bookstore",
+      "category": "Static Sites",
+      "description": "Bookstore with genre and price filters, plus search.",
+      "longDescription": "A clean book store with a search bar, genre and price filters, and featured book badges.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/24.html" },
+      "featured": false
+    },
+    {
+      "id": "site-25",
+      "title": "Minimal Blog",
+      "category": "Static Sites",
+      "description": "A minimalist blog with dark/light theme toggle.",
+      "longDescription": "A simple blog layout with posts, tags, and a theme toggle that persists in localStorage.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/25.html" },
+      "featured": false
+    },
+    {
+      "id": "site-26",
+      "title": "NewsWave – Modern Magazine",
+      "category": "Static Sites",
+      "description": "Magazine‑style news site with hero and category sections.",
+      "longDescription": "A news magazine layout featuring a hero article, secondary articles, and category grids with cards.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/26.html" },
+      "featured": false
+    },
+    {
+      "id": "site-27",
+      "title": "My Personal Journal",
+      "category": "Static Sites",
+      "description": "Journal app with Markdown support and local storage.",
+      "longDescription": "A personal journal where you can write, save, and delete entries using Markdown for formatting.",
+      "tech": ["HTML", "CSS", "JavaScript", "marked.js"],
+      "links": { "Live Demo": "src/sites/27.html" },
+      "featured": false
+    },
+    {
+      "id": "site-29",
+      "title": "TechPulse – Modern Tech Blog",
+      "category": "Static Sites",
+      "description": "Tech blog with category filtering and dark/light theme.",
+      "longDescription": "A technology blog with articles categorized by AI, Web Dev, Mobile, Cloud, and Security. Includes theme toggle.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/29.html" },
+      "featured": false
+    },
+    {
+      "id": "site-30",
+      "title": "Animated Blog",
+      "category": "Static Sites",
+      "description": "Blog with smooth page transitions and article detail views.",
+      "longDescription": "A blog with animated transitions between the home page and article details, using CSS animations and JavaScript.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/30.html" },
+      "featured": false
+    },
+    {
+      "id": "site-31",
+      "title": "The Type Journal – Editorial Design",
+      "category": "Static Sites",
+      "description": "Editorial‑style journal with elegant typography.",
+      "longDescription": "A beautifully designed journal with a focus on typography, featuring a hero article, pullquotes, and a newsletter signup.",
+      "tech": ["HTML", "CSS"],
+      "links": { "Live Demo": "src/sites/31.html" },
+      "featured": false
+    },
+    {
+      "id": "site-32",
+      "title": "Sidebar Blog",
+      "category": "Static Sites",
+      "description": "Blog with sidebar navigation and dark mode.",
+      "longDescription": "A blog layout with a persistent sidebar for navigation and category filters, plus a dark/light theme toggle.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/32.html" },
+      "featured": false
+    },
+    {
+      "id": "site-33",
+      "title": "Masonry Grid Blog",
+      "category": "Static Sites",
+      "description": "Blog with a Pinterest‑style masonry grid and filtering.",
+      "longDescription": "A blog that uses a CSS masonry grid for articles, with category filtering and smooth scroll animations.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/33.html" },
+      "featured": false
+    },
+    {
+      "id": "site-34",
+      "title": "Subscribe – The Weekly Digest",
+      "category": "Static Sites",
+      "description": "Newsletter signup page with form validation.",
+      "longDescription": "A clean newsletter signup page with a form, validation, and success state.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/34.html" },
+      "featured": false
+    },
+    {
+      "id": "site-35",
+      "title": "The Forgotten Expedition – Interactive Story",
+      "category": "Static Sites",
+      "description": "Choose‑your‑own‑adventure story with stats and history.",
+      "longDescription": "An interactive story game where your choices affect the outcome, with health, inventory, and a journal of your journey.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/35.html" },
+      "featured": false
+    },
+    {
+      "id": "site-36",
+      "title": "Penumbra – Dark Academia Journal",
+      "category": "Static Sites",
+      "description": "Dark academia themed journal with articles and newsletter.",
+      "longDescription": "A journal with a dark academia aesthetic, featuring essays, literature, philosophy, and history articles.",
+      "tech": ["HTML", "CSS"],
+      "links": { "Live Demo": "src/sites/36.html" },
+      "featured": false
+    },
+    {
+      "id": "site-37",
+      "title": "NexaLaunch – Startup Landing Page",
+      "category": "Static Sites",
+      "description": "SaaS startup landing page with pricing and CTA.",
+      "longDescription": "A complete startup landing page with hero, features, testimonials, pricing tables, and a newsletter signup.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/37.html" },
+      "featured": false
+    },
+    {
+      "id": "site-38",
+      "title": "CloudFlow – SaaS Product Demo",
+      "category": "Static Sites",
+      "description": "Interactive SaaS demo page with request form and FAQ.",
+      "longDescription": "A product demo page for a SaaS workflow automation tool, featuring a live demo preview, request form, testimonials, and FAQ.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/38.html" },
+      "featured": false
+    },
+    {
+      "id": "site-39",
+      "title": "ConsultPro – Strategic Business Consulting",
+      "category": "Static Sites",
+      "description": "Professional consulting firm website with full branding.",
+      "longDescription": "A complete business consulting site with hero, services, about, team, testimonials, contact form, and footer.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/39.html" },
+      "featured": false
+    },
+    {
+      "id": "site-40",
+      "title": "Justice Law Firm – Professional Legal Services",
+      "category": "Static Sites",
+      "description": "Law firm website with practice areas, attorneys, and case results.",
+      "longDescription": "A professional law firm site with hero, practice highlights, about, attorneys, testimonials, case results, blog, and contact.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/40.html" },
+      "featured": false
+    },
+    {
+      "id": "site-41",
+      "title": "MediCare Clinic – Book an Appointment",
+      "category": "Static Sites",
+      "description": "Medical clinic appointment booking system.",
+      "longDescription": "A clinic booking page with doctor selection, date picker, time slots, and a summary panel.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/41.html" },
+      "featured": false
+    },
+    {
+      "id": "site-42",
+      "title": "Prime Properties – Find Your Dream Home",
+      "category": "Static Sites",
+      "description": "Real estate property search with filters and pagination.",
+      "longDescription": "A property listing site with search filters, sort options, and a grid of property cards with details.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/42.html" },
+      "featured": false
+    },
+    {
+      "id": "site-43",
+      "title": "Gourmet Haven – Table Reservations",
+      "category": "Static Sites",
+      "description": "Restaurant reservation system with date/time selection.",
+      "longDescription": "A restaurant booking page with a reservation form, time slots, and a summary sidebar.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/43.html" },
+      "featured": false
+    },
+    {
+      "id": "site-44",
+      "title": "Savory Bistro – Online Reservations",
+      "category": "Static Sites",
+      "description": "Another restaurant reservation page with validation.",
+      "longDescription": "A restaurant booking page with form validation, dynamic time slots, and a confirmation modal.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/44.html" },
+      "featured": false
+    },
+    {
+      "id": "site-45",
+      "title": "Luxury Stays – Book Your Perfect Hotel",
+      "category": "Static Sites",
+      "description": "Hotel booking platform with search and filtering.",
+      "longDescription": "A hotel booking site with a hero search form, destination filters, and a grid of hotel cards.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/45.html" },
+      "featured": false
+    },
+    {
+      "id": "site-46",
+      "title": "DriveEase – Premium Car Rentals",
+      "category": "Static Sites",
+      "description": "Car rental platform with fleet filtering and booking modal.",
+      "longDescription": "A car rental site with a hero search, fleet filtering, testimonials, and a booking modal with form.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "links": { "Live Demo": "src/sites/46.html" },
+      "featured": false
+    }
+  ]
+}

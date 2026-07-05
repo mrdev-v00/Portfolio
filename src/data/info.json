@@ -27,7 +27,7 @@
       "description": "Complete Semi Auto Ecommerce store.",
       "longDescription": "Ecommerce store that relies on whatsapp managing and excel for stocks, orders on whatsapp and works like a store while being only frontend.",
       "tech": ["HTML", "CSS", "JS"],
-      "links": {https://mrdev-v00.github.io/Agwan-Traders/},
+      "links": { "Github":"https://mrdev-v00.github.io/Agwan-Traders/"},
       "featured": true
     },
     {
@@ -37,7 +37,7 @@
       "description": "Complete Semi Auto Ecommerce store.",
       "longDescription": "Ecommerce store that relies on whatsapp managing and excel for stocks, orders on whatsapp and works like a store while being only frontend.",
       "tech": ["HTML", "CSS", "JS"],
-      "links": {https://mrdev-v00.github.io/Hijaz-Traders/home.html},
+      "links": {"Github" :"https://mrdev-v00.github.io/Hijaz-Traders/home.html" },
       "featured": true
     },
     {

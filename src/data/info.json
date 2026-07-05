@@ -8,7 +8,7 @@
       "longDescription": "Flawless is a powerful and modular Discord bot designed for servers of all sizes. It includes a full moderation suite, fun interactions, leveling system, economy, and custom commands. The bot is highly configurable and actively maintained.",
       "tech": ["Python", "discord.py", "MongoDB"],
       "links": { "GitHub": "https://github.com/mrdev-v00/flawless" },
-      "featured": true
+      "featured": false
     },
     {
       "id": "sweetchat",
@@ -18,6 +18,26 @@
       "longDescription": "Sweetchat leverages OpenAI's GPT models to provide intelligent, context‑aware conversations. It can answer questions, generate creative text, and assist with coding problems.",
       "tech": ["Python", "OpenAI API", "discord.py"],
       "links": {},
+      "featured": false
+    },
+    {
+      "id": "agwan-traders",
+      "title": "Agwan Traders Ecommerce",
+      "category": "E-Commerce Store",
+      "description": "Complete Semi Auto Ecommerce store.",
+      "longDescription": "Ecommerce store that relies on whatsapp managing and excel for stocks, orders on whatsapp and works like a store while being only frontend.",
+      "tech": ["HTML", "CSS", "JS"],
+      "links": {https://mrdev-v00.github.io/Agwan-Traders/},
+      "featured": true
+    },
+    {
+      "id": "hijaz-traders",
+      "title": "Hijaz Traders Ecommerce",
+      "category": "E-Commerce Store",
+      "description": "Complete Semi Auto Ecommerce store.",
+      "longDescription": "Ecommerce store that relies on whatsapp managing and excel for stocks, orders on whatsapp and works like a store while being only frontend.",
+      "tech": ["HTML", "CSS", "JS"],
+      "links": {https://mrdev-v00.github.io/Hijaz-Traders/home.html},
       "featured": true
     },
     {

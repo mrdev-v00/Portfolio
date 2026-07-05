@@ -1,8 +1,3 @@
-
-
-
-
-
 {
   "projects": [
     {
@@ -35,6 +30,7 @@
       "links": { "Github":"https://mrdev-v00.github.io/Agwan-Traders/"},
       "featured": true
     },
+
     {
       "id": "sweetvibe",
       "title": "SweetVibe",

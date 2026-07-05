@@ -8,7 +8,7 @@
       "longDescription": "Flawless is a powerful and modular Discord bot designed for servers of all sizes. It includes a full moderation suite, fun interactions, leveling system, economy, and custom commands. The bot is highly configurable and actively maintained.",
       "tech": ["Python", "discord.py", "MongoDB"],
       "links": { "GitHub": "https://github.com/mrdev-v00/flawless" },
-      "featured": false
+      "featured": true
     },
     {
       "id": "sweetchat",

@@ -36,16 +36,6 @@
       "featured": true
     },
     {
-      "id": "hijaz-traders",
-      "title": "Hijaz Traders Ecommerce",
-      "category": "E-Commerce Store",
-      "description": "Complete Semi Auto Ecommerce store.",
-      "longDescription": "Ecommerce store that relies on whatsapp managing and excel for stocks, orders on whatsapp and works like a store while being only frontend.",
-      "tech": ["HTML", "CSS", "JS"],
-      "links": {"Github" :"https://mrdev-v00.github.io/Hijaz-Traders/home.html" },
-      "featured": true
-    },
-    {
       "id": "sweetvibe",
       "title": "SweetVibe",
       "category": "Discord Bot",
